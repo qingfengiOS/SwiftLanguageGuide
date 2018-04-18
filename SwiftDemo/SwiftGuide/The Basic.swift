@@ -31,6 +31,10 @@ class The_Basic: UIViewController {
         Boolean()
         tuples()
         optionals()
+        ifStatementsForcedUnwrapping()
+        optionBinding()
+        implicitlyUnwrappedOptionals()
+        assert()
     }
     
     /// 定义常量/变量
@@ -190,9 +194,55 @@ class The_Basic: UIViewController {
         }
     }
     
+    
+    /// if语句强制解析
     func ifStatementsForcedUnwrapping() {
-       
+        let possibleNumber = "12"
+        let conversionNumber = Int(possibleNumber)
+        if conversionNumber != nil {
+            print("conversionNumber is an integer value of \(conversionNumber!).")
+        }
     }
+    
+    func optionBinding() {
+        let possibleNumber = "12"
+        if let actualNumber = Int(possibleNumber) {
+            print("\"\(possibleNumber)\" has an integer value of \(actualNumber)")
+        } else {
+            print("\"\(possibleNumber)\" could not be converted to an integer")
+        }
+        
+    }
+    
+    
+    /// 隐式解析可选类型
+    func implicitlyUnwrappedOptionals() {
+        //有时候在程序架构中，第一次被赋值之后，可以确定一个可选类型总会有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值。这种类型的可选状态被定义为隐式解析可选类型(implicitly unwrapped optionals)。把想要用作可选的类型 的后面的问号( String? )改成感叹号( String! )来声明一个隐式解析可选类型。
+        let passibleString: String? = "An optional string"
+        let _: String = passibleString!// 需要感叹号来获取值
+        
+        let assumedString: String! = "An implicitly unwrapped optional string."
+        let _: String = assumedString // 不需要感叹号
+        
+    }
+    
+    
+    /// 断言
+    func assert() {
+        let age = -9
+//        Swift.assert(age >= 0, "age cannot be less than zero")//当条件为假是 程序终止，输出原因，原因可以为空，如下：
+        Swift.assert(age >= 0)
+        /*
+        当条件可能为假时使用断言，但是最终一定要保证条件为真，这样你的代码才能继续运行。断言的适用情景:
+        • 整数类型的下标索引被传入一个自定义下标实现，但是下标索引值可能太小或者太大。
+        • 需要给函数传入一个值，但是非法的值可能导致函数不能正常执行。
+        • 一个可选值现在是 nil ，但是后面的代码运行需要一个非 nil 值。
+         */
+    }
+    
+    
+    
+    
     
     
 }
