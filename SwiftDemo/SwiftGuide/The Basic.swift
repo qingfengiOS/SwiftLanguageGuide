@@ -184,8 +184,15 @@ class The_Basic: UIViewController {
         serverResponseCode = nil
         
         let sureAnswer: String?//可选值自动初始化为nil
+        
+        if conversionNumber != nil {
+            print("convertedNumber contains some integer value.")
+        }
     }
     
+    func ifStatementsForcedUnwrapping() {
+       
+    }
     
     
 }
