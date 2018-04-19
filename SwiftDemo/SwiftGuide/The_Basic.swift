@@ -11,9 +11,7 @@ import UIKit
 typealias AudioSample = UInt16//类型别名
 
 class The_Basic: UIViewController {
-
-    var taArray = ["The Basic","Basic Operations"]
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -229,7 +227,7 @@ class The_Basic: UIViewController {
     
     /// 断言
     func assert() {
-        let age = -9
+        let age = 9
 //        Swift.assert(age >= 0, "age cannot be less than zero")//当条件为假是 程序终止，输出原因，原因可以为空，如下：
         Swift.assert(age >= 0)
         /*
