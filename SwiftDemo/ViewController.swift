@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var dataArray = ["The_Basic","Basic_Operators"]
+    var dataArray = ["The_Basic","Basic_Operators","StringsAndCharacters"]
     
     
     override func viewDidLoad() {
@@ -39,6 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         switch indexPath.row {
         case 0: self.navigationController? .pushViewController(The_Basic() as UIViewController, animated: true)
         case 1: self.navigationController? .pushViewController(Basic_Operators() as UIViewController, animated: true)
+        case 2:
+            self.navigationController? .pushViewController(StringsAndCharacters() as UIViewController, animated: true)
         default: break
         }
         
