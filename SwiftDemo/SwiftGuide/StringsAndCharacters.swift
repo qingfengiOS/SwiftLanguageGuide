@@ -21,6 +21,8 @@ class StringsAndCharacters: UIViewController {
         stringMutability()
         stringsAreValueTypes()
         workingWithCharacters()
+        concatenatingStringsAndCharacters()
+        stringInterpolation()
     }
 
     
@@ -109,6 +111,84 @@ class StringsAndCharacters: UIViewController {
         print(catCharacters,catString)
         
     }
+    
+    /// 连接字符串和字符
+    func concatenatingStringsAndCharacters() {
+        let string1 = "hello"
+        let string2 = "there"
+        
+        var welcome = string1 + string2//直接拼接
+        print(welcome)
+        
+        var instruction = "look over"
+        instruction += string2//使用“+=”
+        
+        let exclamationMark: Character = "!"
+        welcome.append(exclamationMark)
+        /*
+         不能将一个字符串或者字符添加到一个已经存在的字符变量上，因为字符变量只能包含一个字符。
+         */
+        
+        print(welcome,instruction,welcome)
+        
+        //If you’re using multiline string literals to build up the lines of a longer string, you want every line in the string to end with a line break, including the last line.
+        let badStart = """
+        one
+        two
+        """
+        
+        let end = """
+        three
+        """
+        print(badStart + end)
+        print("-----------------------")
+        
+        let goodStart = """
+        one
+        two
+
+        """
+        print(goodStart + end)
+        /*
+         在上面的代码中,连接badStart与最终产生一个两行字符串,这并不是期望的结果。因为badStart的最后一行不以换行符结束,这条线会结合的第一行。相比之下,两行goodStart以换行符结束,所以当它结合最终结果三行,如预期。
+         */
+    }
+    
+    
+    /// 字符串插入
+    func stringInterpolation() {
+        /*
+         字符串插值是一种构建新字符串的方式，可以在其中包含常量、变量、字面量和表达式。 您插入的字符串字面量 的每一项都在以反斜线为前缀的圆括号中
+         */
+        let multiplier = 3
+        let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
+        print(message)
+        
+        /*
+         Unicode:
+         Unicode是一个国际标准，用于文本的编码和表示。 它使您可以用标准格式表示来自任意语言几乎所有的字 符，并能够对文本文件或网页这样的外部资源中的字符进行读写操作。 Swift 的 String 和 Character 类型是完 全兼容 Unicode 标准的。
+
+         Unicode 标量:
+         Swift 的 String 类型是基于 Unicode 标量 建立的。 Unicode 标量是对应字符或者修饰符的唯一的21位数 字，例如 U+0061 表示小写的拉丁字母( LATIN SMALL LETTER A )(" a ")， U+1F425 表示小鸡表情(
+         ABY CHICK ) (" ? ")
+         
+         注意不是所有的21位 Unicode 标量都代表一个字符，因为有一些标量是留作未来分配的。已经代表一个典型字符 的标量都有自己的名字，例如上面例子中的 LATIN SMALL LETTER A 和 FRONT-FACING BABY CHICK 。
+         */
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
