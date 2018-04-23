@@ -23,6 +23,11 @@ class StringsAndCharacters: UIViewController {
         workingWithCharacters()
         concatenatingStringsAndCharacters()
         stringInterpolation()
+        countingCharater()
+        accessingAndModifyingString()
+        insertAndDelete()
+        compareString()
+        unicodeRepresentationsOfStrings()
     }
 
     
@@ -177,17 +182,188 @@ class StringsAndCharacters: UIViewController {
     }
     
     
+    /// 计算字符数量
+    func countingCharater() {
+        let unusualMenagerie = "Koala ？，Snail ?, Penguin ?, Dromedry?"
+        print("unusualMenagerie has \(unusualMenagerie.characters.count) characters")
+        
+        /*
+         注意在 Swift 中，使用可拓展的字符群 作为   值来连接或改变字符串时，并不一定会更改字符串的字 符数量。
+         例如，如果你用四个字符的单词   初始化一个新的字符串，然后添加一个
+         1 )作为字符串的结尾。最终这个字符串的字符数量仍然是4，因为第四个字符是é，而不是e
+         */
+        var word = "cafe"
+        print("the number of characters in \(word) is \(word.characters.count)") // 打印输出 "the number of characters in cafe is 4"
+        let s = "\u{301}"
+        word += s    // COMBINING ACUTE ACCENT, U+0301
+        print("the number of characters in \(word) is \(word.characters.count)") // 打印输出 "the number of characters in café is 4"
+    }
     
     
+    /// 访问和修改字符串
+    func accessingAndModifyingString() {
+        let greeting = "Guten Tag!"
+        let a = greeting[greeting.startIndex]
+        let b = greeting[greeting.index(before: greeting.endIndex)]
+        let c = greeting[greeting.index(after:greeting.startIndex)]
+        let d = greeting[greeting.index(greeting.startIndex, offsetBy: 7)]
+        
+        print(a,b,c,d)
+        
+//        greeting[greeting.index(greeting.startIndex, offsetBy: 10)]//下标越界
+//        greeting[greeting.endIndex] // error
+//        greeting.index(after:greeting.endIndex) // error
+        
+        /*
+         使用 characters 属性的 indices 属性会创建一个包含全部索引的范围(Range)，用来在一个字符串中访问单个字符
+         */
+        for index in greeting.characters.indices{
+            print("\(greeting[index]) ", terminator: "")
+        }
+        
+    }
     
+    func insertAndDelete() {
+        var welcome = "hello"
+        print("......................................")
+        welcome.insert("!", at: welcome.endIndex)
+        print(welcome)
+        welcome.insert(contentsOf: " world", at: welcome.index(before: welcome.endIndex))
+        print(welcome)
+        welcome.remove(at: welcome.index(before: welcome.endIndex))//单个删除
+        print(welcome)
+        
+        let range = welcome.index(welcome.endIndex, offsetBy: -6)..<welcome.endIndex
+        welcome.removeSubrange(range)
+        print(welcome)
+    }
     
+    func compareString() {
+        /*
+         Swift 提供了三种方式来比较文本值:字符串字符相等、前缀相等和后缀相等。
+         */
+        //字符串/字符可以用等于操作符( == )和不等于操作符( != )
+        let quotation = "We're a lot alike, you and I"
+        let sameQuotation = "We're a lot alike, you and I"
+        if quotation == sameQuotation {
+            print("These two strings are considered equal")
+        }
+     
+        /*
+         如果两个字符串(或者两个字符)的可扩展的字形群 是标准相等的，那就认为它们是相等的。在这个情况 下，即使可扩展的字形群 是有不同的 Unicode 标量构成的，只要它们有同样的语言意义和外观，就认为它们标 准相等。
+         例如， LATIN SMALL LETTER E WITH ACUTE ( U+00E9 )就是标准相等于 LATIN SMALL LETTER E ( U+0065 )后面加上 C OMBINING ACUTE ACCENT ( U+0301 )。这两个字符群 都是表示字符 é 的有效方式，所以它们被认为是标准相等 的:
+         */
+        
+        // "Voulez-vous un café?" 使用 LATIN SMALL LETTER E WITH ACUTE
+        let eAcuteQuestion = "Voulez-vous un caf\u{E9}?"
+        // "Voulez-vous un café?" 使用 LATIN SMALL LETTER E and COMBINING ACUTE ACCENT
+        let combinedEAcuteQuestion = "Voulez-vous un caf\u{65}\u{301}?"
+        if eAcuteQuestion == combinedEAcuteQuestion {
+            print("These two strings are considered equal")
+        }
+        
+        
+        /*
+         相反，英语中的 LATIN CAPITAL LETTER A ( U+0041 ，或者 A )不等于俄语中的 CYRILLIC CAPITAL LETTER A ( 0 ，或者 A )。两个字符看着是一样的，但却有不同的语言意义:
+         */
+        let lationCapitalLetterA: Character = "\u{41}"
+        
+        let cyrillicCapitalLetterA: Character = "\u{0410}"
+        
+        if lationCapitalLetterA == cyrillicCapitalLetterA {
+            print("These two characters are equivalent")
+        } else {
+            print("These two characters are not equivalent")
+        }
+        /*
+         注意:
+         在 Swift 中，字符串和字符并不区分地域(not locale-sensitive)。
+         */
+        
+        //前缀/后缀相等
+        
+        //通过调用字符串的 hasPrefix(_:) / hasSuffix(_:) 方法来检查字符串是否拥有特定前缀/后缀，两个方法均接收一 个 String 类型的参数，并返回一个布尔值
+        let romeoAndJuliet = [
+            "Act 1 Scene 1: Verona, A public place",
+            "Act 1 Scene 2: Capulet's mansion",
+            "Act 1 Scene 3: A room in Capulet's mansion",
+            "Act 1 Scene 4: A street outside Capulet's mansion",
+            "Act 1 Scene 5: The Great Hall in Capulet's mansion",
+            "Act 2 Scene 1: Outside Capulet's mansion",
+            "Act 2 Scene 2: Capulet's orchard",
+            "Act 2 Scene 3: Outside Friar Lawrence's cell",
+            "Act 2 Scene 4: A street in Verona",
+            "Act 2 Scene 5: Capulet's mansion",
+            "Act 2 Scene 6: Friar Lawrence's cell"
+        ]
+        
+        var act1Scene = 0
+        var mansionCount = 0
+        var cellCount = 0
+        for scene in romeoAndJuliet {
+            if scene.hasPrefix("Act 1") {
+                act1Scene += 1
+            }
+            
+            if scene.hasSuffix("Capulet's mansion") {
+                mansionCount += 1
+            } else if scene.hasSuffix("Friar Lawrence's cell") {
+                cellCount += 1
+            }
+        }
+        print(act1Scene,mansionCount,cellCount)
+        /*
+         注意:
+         hasPrefix(_:) 和 hasSuffix(_:) 方法都是在每个字符串中逐字符比较其可扩展的字符群 是否标准相等
+         */
+    }
     
-    
-    
-    
-    
-    
-    
+    /// 字符串的 Unicode 表示形式
+    func unicodeRepresentationsOfStrings() {
+        /**
+         当一个 Unicode 字符串被写进文本文件或者其他储存时，字符串中的 Unicode 标量会用 Unicode 定义的几种 编码格式 (encoding forms)编码。每一个字符串中的小块编码都被称 代码单元 (code units)。这些包括 UT
+         F-8 编码格式(编码字符串为8位的代码单元)， UTF-16 编码格式(编码字符串位16位的代码单元)，以及 UT F-32 编码格式(编码字符串32位的代码单元)。
+         Swift 提供了几种不同的方式来访问字符串的 Unicode 表示形式。 您可以利用 for-in 来对字符串进行遍历，从 而以 Unicode 可扩展的字符群 的方式访问每一个 Character 值。
+         */
+        let dogString = "Dog‼🐶"
+        
+        for codeUnit in dogString.utf8 {
+            print("\(codeUnit) ", terminator: "")
+        }
+        print("")
+        // 68 111 103 226 128 188 240 159 144 182
+        /*
+         前三个10进制 codeUnit 值 ( 68 , 111 , 103 ) 代表了字符 D 、 o 和 g ，它们的 UTF-8 表示 与 ASCII 表示相同。 接下来的三个10进制 codeUnit 值 ( 226 , 128 , 188 ) 是 DOUBLE EXCLAMATION MARK 的3 字节 UTF-8 表示。 最后的四个 codeUnit 值 ( 240 , 159 , 144 , 182 ) 是 DOG FACE 的4字节 UTF-8 表示。
+         */
+        for codeUnit in dogString.utf16 {
+            print("\(codeUnit) ", terminator: "")
+        }
+        print("")
+        // 68 111 103 8252 55357 56374
+        /*
+         同样，前三个 codeUnit 值 ( 68 , 111 , 103 ) 代表了字符 D 、 o 和 g ，它们的 UTF-16 代码单元和 UTF-8 完全相同(因为这些 Unicode 标量表示 ASCII 字符)。
+         第四个 codeUnit 值 ( 8252 ) 是一个等于十六进制 203C 的的十进制值。这个代表了 DOUBLE EXCLAMATION MARK 字 符的 Unicode 标量值 U+203C 。这个字符在 UTF-16 中可以用一个代码单元表示。
+         第五和第六个 codeUnit 值 ( 55357 和 56374 ) 是 DOG FACE 字符的 UTF-16 表示。 第一个值为 U+D83D (十进制 值为 55357 )，第二个值为 U+DC36 (十进制值为 56374 )。
+         */
+        for scalar in dogString.unicodeScalars {
+            print("\(scalar.value) ", terminator: "")
+        }
+        print("")
+        // 68 111 103 8252 128054
+        /*
+         前三个 UnicodeScalar 值( 68 , 111 , 103 )的 value 属性仍然代表字符 D 、 o 和 g 。 第四个 codeUnit 值( 82 52 )仍然是一个等于十六进制 203C 的十进制值。这个代表了 DOUBLE EXCLAMATION MARK 字符的 Unicode 标量 U+2 03C 。
+         第五个 UnicodeScalar 值的 value 属性， 128054 ，是一个十六进制 1F436 的十进制表示。其等同于 DOG FACE 的 Unicode 标量 U+1F436 。
+         */
+        
+        /*
+         作为查询它们的 value 属性的一种替代方法，每个 UnicodeScalar 值也可以用来构建一个新的 String 值，比如在 字符串插值中使用:
+         */
+        for scalar in dogString.unicodeScalars {
+            print("\(scalar) ")
+        }
+        
+        
+    }
     
     
     
