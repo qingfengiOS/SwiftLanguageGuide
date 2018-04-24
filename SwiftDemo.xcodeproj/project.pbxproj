@@ -16,6 +16,7 @@
 		FD23579D207E49CB000D1C75 /* SwiftDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD23579C207E49CB000D1C75 /* SwiftDemoTests.swift */; };
 		FD2357A8207E49CB000D1C75 /* SwiftDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2357A7207E49CB000D1C75 /* SwiftDemoUITests.swift */; };
 		FD2357B7207E4DC7000D1C75 /* The_Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2357B6207E4DC7000D1C75 /* The_Basic.swift */; };
+		FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD57E861208F6A1500A021AC /* CollectionTypes.swift */; };
 		FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		FD2357A7207E49CB000D1C75 /* SwiftDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDemoUITests.swift; sourceTree = "<group>"; };
 		FD2357A9207E49CB000D1C75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD2357B6207E4DC7000D1C75 /* The_Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Basic.swift; sourceTree = "<group>"; };
+		FD57E861208F6A1500A021AC /* CollectionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTypes.swift; sourceTree = "<group>"; };
 		FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				FD2357B6207E4DC7000D1C75 /* The_Basic.swift */,
 				FD069D442088CD27009938E5 /* Basic_Operators.swift */,
 				FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */,
+				FD57E861208F6A1500A021AC /* CollectionTypes.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				FD069D452088CD27009938E5 /* Basic_Operators.swift in Sources */,
 				FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */,
 				FD2357B7207E4DC7000D1C75 /* The_Basic.swift in Sources */,
+				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,
 				FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */,
 				FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */,
 			);
