@@ -295,18 +295,18 @@ class CollectionTypes: UIViewController {
         
         //字典遍历
         for (airportCode, airportName) in airports {
-            print("(airportCode): (airportName)")
+            print("(airportName): \(airportName)")
         }
         
         //通过访问key或者value属性，我们也可以遍历字典的键或者值:
         for airportCode in airports.keys {
-            print("Airport code: (airportCode)")
+            print("Airport code: \(airportCode)")
         }
         // Airport code: YYZ
         // Airport code: LHR
         
         for airportName in airports.values {
-            print("Airport name: (airportName)")
+            print("Airport name: \(airportName)")
         }
         // Airport name: Toronto Pearson
         // Airport name: London Heathrow
