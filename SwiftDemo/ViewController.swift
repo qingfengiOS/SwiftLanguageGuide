@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var dataArray = ["The_Basic","Basic_Operators","StringsAndCharacters","CollectionTypes","ControlFlow"]
+    var dataArray = ["The_Basic","Basic_Operators","StringsAndCharacters","CollectionTypes","ControlFlow","Functions"]
     
     
     override func viewDidLoad() {
@@ -45,7 +45,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.navigationController? .pushViewController(CollectionTypes() as UIViewController, animated: true)
         case 4:
             self.navigationController? .pushViewController(ControlFlow() as UIViewController, animated: true)
-            
+        case 5:
+            self.navigationController? .pushViewController(Functions() as UIViewController, animated: true)
         default: break
         }
         
