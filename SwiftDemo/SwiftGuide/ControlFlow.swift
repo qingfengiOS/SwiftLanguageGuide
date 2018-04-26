@@ -22,6 +22,7 @@ class ControlFlow: UIViewController {
         ifStatements()
         switchStatements()
 
+        controlTransferStatement()
     }
 
     
@@ -213,7 +214,152 @@ class ControlFlow: UIViewController {
         }
         print(approximateCount,"There are \(naturalCount) \(countedThings).")
         
+        
+        //元组 区间匹配
+        let somepoint = (1,1)
+        switch somepoint {
+        case (0, 0):
+            print("\(somepoint) is at origin")
+        case (_, 0):
+            print("\(somepoint) is on the x-axis")
+        case (0, _):
+            print("\(somepoint) is on the y-axis")
+        case(-2...2, -2...2):
+            print("\(somepoint) is inside the box")
+        default:
+            print("\(somepoint) is outside the box")
+        }
+        
+        //值绑定
+        //case 分支允许将匹配的值绑定到一个临时的常量或变量，并且在case分支体内使用 —— 这种行为被称为值绑 定(value binding)，因为匹配的值在case分支体内，与临时的常量或变量绑定。
+        let anotherPoint = (2, 0)
+        switch anotherPoint {
+        case (let x, 0):
+            print("on the x-axis with an x value of \(x)")
+        case (0, let y):
+            print("on the y-axis with a y value of \(y)")
+        case let (x, y):
+            print("somewhere else at (\(x), \(y))")
+        }
+        
+        
+        //Where
+        //case 分支的模式可以使用 where 语句来判断额外的条件。
+        let yellowPoint = (1,-1)
+        switch yellowPoint {
+        case let (x, y) where x == y:
+            print("(\(x), \(y)) is on the line x == y")
+        case let (x, y) where x == -y:
+            print("(\(x), \(y)) is on the line x == -y")
+        case let (x, y):
+            print("(\(x), \(y)) is just some arbitrary point")
+        }
+        
+        //复合匹配
+        //当多个条件可以使用同一种方法来处理时，可以将这几种可能放在同一个 case 后面，并且用逗号隔开。当case后 面的任意一种模式匹配的时候，这条分支就会被匹配。并且，如果匹配列表过长，还可以分行书写:
+        let someCharacters: Character = "e"
+        switch someCharacters {
+        case "a", "e", "i", "o", "u":
+            print("\(someCharacters) is a vowel")
+        case "b", "c", "d", "f", "g", "h", "j", "k", "l", "m",
+             "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z":
+            print("\(someCharacters) is a consonant")
+        default:
+            print("\(someCharacters) is not a vowel or a consonant")
+        }
+        
     }
 
+    
+    /// 控制转移语句
+    func controlTransferStatement() {
+        //Continue
+        //continue 语句告诉一个循环体立刻停止本次循环，重新开始下次循环。就好像在说“本次循环我已经执行完 了”，但是并不会离开整个循环体。
+        let puzzleInput = "greet minds think alike"
+        var puzzleOutput = ""
+        let charactersToRemove: [Character] = ["a", "e", "i", "o", "u", " "]
+        for character in puzzleInput {
+            if charactersToRemove.contains(character) {//如果字符需要被移除就不拼接到输出字符串
+            continue
+            } else {
+                puzzleOutput.append(character)
+            }
+            print(puzzleOutput)
+        }
+        
+        //break
+        /*
+        break 语句会立刻结束整个控制流的执行。当你想要更早的结束一个 switch 代码块或者一个循环体时，你都可以 使用 break 语句。
+        
+        Switch 语句中的 break
+        当在一个 switch 代码块中使用 break 时，会立即中断该 switch 代码块的执行，并且跳转到表示 switch 代码块 结束的大括号( } )后的第一行代码。
+        */
+        
+        let numberSymbol: Character = "三"//// Chinese symbol for the number 3
+        var possibleIntegerValue: Int?
+        switch numberSymbol {
+        case "1", "١", "一", "๑":
+            possibleIntegerValue = 1
+        case "2", "٢", "二", "๒":
+            possibleIntegerValue = 2
+        case "3", "٣", "三", "๓":
+            possibleIntegerValue = 3
+        case "4", "٤", "四", "๔":
+            possibleIntegerValue = 4
+        default:
+            break
+        }
+        if let integerValue = possibleIntegerValue {
+            print("The integer value of \(numberSymbol) is \(integerValue).")
+        } else {
+            print("An integer value could not be found for \(numberSymbol).")
+        }
+        
+        /*
+         想要把 Character 所有的的可能性都枚举出来是不现实的，所以使用 default 分支来包含所有 上面没有匹配到字符的情况。由于这个 default 分支不需要执行任何动作，所以它只写了一条 break 语句。一旦 落入到 default 分支中后， break 语句就完成了该分支的所有代码操作，代码继续向下，开始执行 if let 语句。
+         */
+        
+        
+        //Fallthrough
+        //Swift 中的 switch 不会从上一个 case 分支落入到下一个 case 分支中。相反，只要第一个匹配到的 case 分支 完成了它需要执行的语句，整个 switch 代码块完成了它的执行。相比之下，C 语言要求你显式地插入 break 语句 到每个 case 分支的末尾来阻止自动落入到下一个 case 分支中。Swift 的这种避免默认落入到下一个分支中的 特性意味着它的 switch 功能要比 C 语言的更加清晰和可预测，可以避免无意识地执行多个 case 分支从而引发 的错误。如果你确实需要 C 风格的贯穿的特性，你可以在每个需要该特性的 case 分支中使用 fallthrough 关键字
+        
+        let integerToDescribe = 5
+        var description = "The number \(integerToDescribe) is"
+        switch integerToDescribe {
+        case 2, 3, 5, 7, 11, 13, 17, 19:
+            description += " a prime number, and also"
+            fallthrough
+        default:
+            description += " an integer."
+        }
+        print(description)
+        
+        
+        //带标签的语句
+        let finalSquare = 25
+        var board = [Int](repeating: 0, count: finalSquare + 1)
+        board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
+        board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
+        var square = 0
+        var diceRoll = 0
+     
+        gameLoop: while square != finalSquare {
+            diceRoll += 1
+            if diceRoll == 7 { diceRoll = 1 }
+            switch square + diceRoll {
+            case finalSquare:
+                // 骰子数刚好使玩家移动到最终的方格里，游戏结束。
+                break gameLoop
+            case let newSquare where newSquare > finalSquare:
+                // 骰子数将会使玩家的移动超出最后的方格，那么这种移动是不合法的，玩家需要重新掷骰子
+                continue gameLoop
+            default:
+                // 合法移动，做正常的处理 square += diceRoll
+                square += board[square]
+            } }
+        print("Game over!")
+        
+    }
+    
     
 }
