@@ -42,6 +42,7 @@ class Closures: UIViewController {
         shorthandArgumentNames()
         operatorMethods()
         
+        captureValue()
     }
     
     /// sorted 方法
@@ -198,6 +199,80 @@ class Closures: UIViewController {
          */
         
     }
+    
+    //MARK: --值捕获
+    func makeIncrementer(forIncrement amount: Int) -> () -> Int {
+        //Swift 中，可以捕获值的闭包的最简单形式是嵌套函数，也就是定义在其他函数的函数体内的函数。嵌套函数可 以捕获其外部函数所有的参数以及定义的常量和变量。
+        
+        //举个例子，这有一个叫做 makeIncrementor 的函数，其包含了一个叫做 incrementor 的嵌套函数。嵌套函数 incrementor() 从上下文中捕获了两个值，runningTotal 和 amount。捕获这些值之后，makeIncrementor 将 incrementor 作为闭包返回。每次调用 incrementor 时，其会以 amount 作为增量增加 runningTotal 的值。
+        
+        var runningTotal = 0
+        func incrementer() -> Int {
+            runningTotal += amount
+            return runningTotal
+        }
+        return incrementer
+        /*
+         incrementer() 函数并没有任何参数，但是在函数体内访问了 runningTotal 和 amount 变量。这是因为它从 外围函数捕获了 runningTotal 和 amount 变量的引用。捕获引用保证了 runningTotal 和 amount 变量在 调用完 makeIncrementer 后不会消失，并且保证了在下一次执行 incrementer 函数时，runningTotal 依旧存在。
+         */
+    }
+    
+    
+    func captureValue() {
+        
+        let incrementByTen = makeIncrementer(forIncrement: 10)
+        print(incrementByTen)
+        let incrementBySeven = makeIncrementer(forIncrement: 7)
+        print(incrementBySeven())
+        /*
+         闭包是引用类型
+         上面的例子中，incrementBySeven 和 incrementByTen 都是常量，但是这些常量指向的闭包仍然可以增加其捕 获的变量的值。这是因为函数和闭包都是引用类型。
+         无论你将函数或闭包赋值给一个常量还是变量，你实际上都是将常量或变量的值设置为对应函数或闭包的引 用。上面的例子中，指向闭包的引用 incrementByTen 是一个常量，而并非闭包内容本身。
+         */
+        
+        //这也意味着如果你将闭包赋值给了两个不同的常量或变量，两个值都会指向同一个闭包:
+        let alsoIncrementByTen = incrementByTen
+        print(alsoIncrementByTen())
+        
+    }
+    
+    //MARK:--逃逸闭包
+    //当一个闭包作为参数传到一个函数中，但是这个闭包在函数返回之后才被执行，我们称该闭包从函数中逃逸。当 你定义接受闭包作为参数的函数时，你可以在参数名之前标注 @escaping ，用来指明这个闭包是允许“逃逸”出 这个函数的。
+    
+    //一种能使闭包“逃逸”出函数的方法是，将这个闭包保存在一个函数外部定义的变量中。举个例子，很多启动异 步操作的函数接受一个闭包参数作为 completion handler。这类函数会在异步操作开始之后立刻返回，但是闭包 直到异步操作结束后才会被调用。在这种情况下，闭包需要“逃逸”出函数，因为闭包需要在函数返回之后被调 用。例如
+    var completionHandlers: [() -> Void] = []
+    func someFunctionWithEscapingClosure(completionHandler: @escaping() -> Void) {
+        completionHandlers.append(completionHandler)
+    }
+    /*
+     someFunctionWithEscapingClosure(_:) 函数接受一个闭包作为参数，该闭包被添加到一个函数外定义的数组 中。如果你不将这个参数标记为 @escaping ，就会得到一个编译错误。
+     
+     将一个闭包标记为 @escaping 意味着你必须在闭包中显式地引用 self 。比如说，在下面的代码中，传递到 s omeFunctionWithEscapingClosure(_:) 中的闭包是一个逃逸闭包，这意味着它需要显式地引用 self 。相对 的，传递到 someFunctionWithNonescapingClosure(_:) 中的闭包是一个非逃逸闭包，这意味着它可以隐式引用self 。
+     */
+    
+    func someFutionWithNoneescapingClosure(closure: () -> Void) {
+        closure()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
