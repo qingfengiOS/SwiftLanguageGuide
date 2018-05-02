@@ -27,6 +27,8 @@ class Closures: UIViewController {
      • 尾随闭包语法
      
      */
+    var completionHandlers: [() -> Void] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -43,6 +45,7 @@ class Closures: UIViewController {
         operatorMethods()
         
         captureValue()
+        autoClosure()
     }
     
     /// sorted 方法
@@ -227,7 +230,7 @@ class Closures: UIViewController {
         /*
          闭包是引用类型
          上面的例子中，incrementBySeven 和 incrementByTen 都是常量，但是这些常量指向的闭包仍然可以增加其捕 获的变量的值。这是因为函数和闭包都是引用类型。
-         无论你将函数或闭包赋值给一个常量还是变量，你实际上都是将常量或变量的值设置为对应函数或闭包的引 用。上面的例子中，指向闭包的引用 incrementByTen 是一个常量，而并非闭包内容本身。
+         无论你将函数或闭包赋值给一个常量还是变量，你实际上都是将常量或变量的值设置为对应函数或闭包的引 用。上面的例子中，指向闭包的引用incrementByTen是一个常量，而并非闭包内容本身。
          */
         
         //这也意味着如果你将闭包赋值给了两个不同的常量或变量，两个值都会指向同一个闭包:
@@ -240,41 +243,91 @@ class Closures: UIViewController {
     //当一个闭包作为参数传到一个函数中，但是这个闭包在函数返回之后才被执行，我们称该闭包从函数中逃逸。当 你定义接受闭包作为参数的函数时，你可以在参数名之前标注 @escaping ，用来指明这个闭包是允许“逃逸”出 这个函数的。
     
     //一种能使闭包“逃逸”出函数的方法是，将这个闭包保存在一个函数外部定义的变量中。举个例子，很多启动异 步操作的函数接受一个闭包参数作为 completion handler。这类函数会在异步操作开始之后立刻返回，但是闭包 直到异步操作结束后才会被调用。在这种情况下，闭包需要“逃逸”出函数，因为闭包需要在函数返回之后被调 用。例如
-    var completionHandlers: [() -> Void] = []
+    
     func someFunctionWithEscapingClosure(completionHandler: @escaping() -> Void) {
         completionHandlers.append(completionHandler)
     }
     /*
      someFunctionWithEscapingClosure(_:) 函数接受一个闭包作为参数，该闭包被添加到一个函数外定义的数组 中。如果你不将这个参数标记为 @escaping ，就会得到一个编译错误。
      
-     将一个闭包标记为 @escaping 意味着你必须在闭包中显式地引用 self 。比如说，在下面的代码中，传递到 s omeFunctionWithEscapingClosure(_:) 中的闭包是一个逃逸闭包，这意味着它需要显式地引用 self 。相对 的，传递到 someFunctionWithNonescapingClosure(_:) 中的闭包是一个非逃逸闭包，这意味着它可以隐式引用self 。
+     将一个闭包标记为 @escaping 意味着你必须在闭包中显式地引用 self 。比如说，在下面的代码中，传递到 s omeFunctionWithEscapingClosure(_:) 中的闭包是一个逃逸闭包，这意味着它需要显式地引用 self 。相对的，传递到 someFunctionWithNonescapingClosure(_:) 中的闭包是一个非逃逸闭包，这意味着它可以隐式引用self 。
      */
     
     func someFutionWithNoneescapingClosure(closure: () -> Void) {
         closure()
+
+    }
+    
+    var x = 10
+    func doSomethig() {
+        someFunctionWithEscapingClosure { self.x = 100}
+        someFutionWithNoneescapingClosure { x = 200 }
+    }
+    
+    //MARK: --自动闭包
+    //自动闭包是一种自动创建的闭包，用于包装传递给函数作为参数的表达式。这种闭包不接受任何参数，当它被调用的时候，会返回被包装在其中的表达式的值。这种便利语法让你能够省略闭包的花括号，用一个普通的表达式来代替显式的闭包。
+    func autoClosure() {
+        
+        var customersInLine = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
+        print(customersInLine.count)// 打印出 "5"
+
+        let customerProvider = { customersInLine.remove(at: 0) }
+        print(customersInLine.count)// 打印出 "5"
+
+        
+        print("Now serving \(customerProvider())!") // Prints "Now serving Chris!"
+        print(customersInLine.count)// 打印出 "4"
+        /*
+         尽管在闭包的代码中,customersInLine的第一个元素被移除了，不过在闭包被调用之前，这个元素是不会被移除的。如果这个闭包永远不被调用，那么在闭包里面的表达式将永远不会执行，那意味着列表中的元素永远不会 被移除。请注意，customersInLine的类型不是String，而是() -> String ，一个没有参数且返回值为String的函数。
+         */
+ 
+        
+//        serve { () -> String in
+//            customersInLine.remove(at: 0)
+//        }
+        serve { customersInLine.remove(at: 0)}//这两种调用一样
+        
+        
+        serve(customer: customersInLine.remove(at: 0))
+        
+        
+        customersInLine = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
+        collectCustomerProviders(customersInLine.remove(at: 0))
+        collectCustomerProviders(customersInLine.remove(at: 0))
+        print("Collected \(customerProviders.count) closures.")
+        for customerProvider in customerProviders {
+            print("Now serving \(customerProvider())!")
+        }
+        
+        
+    }
+    
+    //将闭包作为参数传递给函数时，你能获得同样的延时求值行为。
+    func serve(customer customerProvider: () -> String) {
+        print("Now serving \(customerProvider())!")
+        print(customerProvider().count)
+    }
+    
+    
+    //上面的 serve(customer:) 函数接受一个返回顾客名字的显式的闭包。下面这个版本的 serve(customer:) 完成 了相同的操作，不过它并没有接受一个显式的闭包，而是通过将参数标记为 @autoclosure 来接收一个自动闭 包。现在你可以将该函数当作接受 String 类型参数(而非闭包)的函数来调用。customerProvider 参数将自 动转化为一个闭包，因为该参数被标记了 @autoclosure 特性
+    func serve(customer cuntomerProvide: @autoclosure () -> String) {
+        print("Now serving \(cuntomerProvide())!")
+        print(cuntomerProvide().count)
     }
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //如果你想让一个自动闭包可以“逃逸”，则应该同时使用 @autoclosure 和 @escaping 属性。
+    var customerProviders: [() -> String] = []
+    func collectCustomerProviders(_ customerProvider: @autoclosure @escaping () -> String) {
+        customerProviders.append(customerProvider)
+        /*
+         在上面的代码中，collectCustomerProviders(_:) 函数并没有调用传入的 customerProvider 闭包，而是将闭包 追加到了 customerProviders 数组中。这个数组定义在函数作用域范围外，这意味着数组内的闭包能够在函数返 回之后被调用。因此，customerProvider 参数必须允许“逃逸”出函数作用域。
+         */
+    }
+   
     
     
 }
+
+

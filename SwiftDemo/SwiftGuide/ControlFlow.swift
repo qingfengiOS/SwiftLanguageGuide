@@ -9,7 +9,7 @@
 import UIKit
 
 class ControlFlow: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -30,7 +30,7 @@ class ControlFlow: UIViewController {
         greet(person: ["name": "Jane", "location": "Cupertino"])
         
         checkingAPIAvailability()
-        
+
     }
 
     

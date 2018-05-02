@@ -45,8 +45,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.row {
-        case 0: self.navigationController? .pushViewController(The_Basic() as UIViewController, animated: true)
-        case 1: self.navigationController? .pushViewController(Basic_Operators() as UIViewController, animated: true)
+        case 0: self.navigationController? .pushViewController(TheBasic() as UIViewController, animated: true)
+        case 1: self.navigationController? .pushViewController(BasicOperators() as UIViewController, animated: true)
         case 2:
             self.navigationController? .pushViewController(StringsAndCharacters() as UIViewController, animated: true)
         case 3:
@@ -56,7 +56,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         case 5:
             self.navigationController? .pushViewController(Functions() as UIViewController, animated: true)
         case 6:
-            self.navigationController? .pushViewController(Closures() as UIViewController, animated: true)
+            let instance = Closures()
+            instance.doSomethig()
+            print(instance.x)
+            
+            instance.completionHandlers.first?()
+            print(instance.x)
+            
+            self.navigationController? .pushViewController(instance as UIViewController, animated: true)
             
         default: break
         }

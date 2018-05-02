@@ -10,7 +10,7 @@ import UIKit
 
 typealias AudioSample = UInt16//类型别名
 
-class The_Basic: UIViewController {
+class TheBasic: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

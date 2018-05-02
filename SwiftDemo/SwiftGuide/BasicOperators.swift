@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Basic_Operators: UIViewController {
+class BasicOperators: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

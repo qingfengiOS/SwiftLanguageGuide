@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD06782C2090B897009C477F /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06782B2090B897009C477F /* ControlFlow.swift */; };
-		FD069D452088CD27009938E5 /* Basic_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD069D442088CD27009938E5 /* Basic_Operators.swift */; };
+		FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD069D442088CD27009938E5 /* BasicOperators.swift */; };
 		FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235787207E49CB000D1C75 /* AppDelegate.swift */; };
 		FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235789207E49CB000D1C75 /* ViewController.swift */; };
 		FD23578D207E49CB000D1C75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD23578B207E49CB000D1C75 /* Main.storyboard */; };
@@ -16,7 +16,7 @@
 		FD235792207E49CB000D1C75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD235790207E49CB000D1C75 /* LaunchScreen.storyboard */; };
 		FD23579D207E49CB000D1C75 /* SwiftDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD23579C207E49CB000D1C75 /* SwiftDemoTests.swift */; };
 		FD2357A8207E49CB000D1C75 /* SwiftDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2357A7207E49CB000D1C75 /* SwiftDemoUITests.swift */; };
-		FD2357B7207E4DC7000D1C75 /* The_Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2357B6207E4DC7000D1C75 /* The_Basic.swift */; };
+		FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2357B6207E4DC7000D1C75 /* TheBasic.swift */; };
 		FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C0F0209214C300E8CA59 /* Functions.swift */; };
 		FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD57E861208F6A1500A021AC /* CollectionTypes.swift */; };
 		FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */; };
@@ -42,7 +42,7 @@
 
 /* Begin PBXFileReference section */
 		FD06782B2090B897009C477F /* ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlFlow.swift; sourceTree = "<group>"; };
-		FD069D442088CD27009938E5 /* Basic_Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_Operators.swift; sourceTree = "<group>"; };
+		FD069D442088CD27009938E5 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
 		FD235784207E49CB000D1C75 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD235787207E49CB000D1C75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD235789207E49CB000D1C75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		FD2357A3207E49CB000D1C75 /* SwiftDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2357A7207E49CB000D1C75 /* SwiftDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDemoUITests.swift; sourceTree = "<group>"; };
 		FD2357A9207E49CB000D1C75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD2357B6207E4DC7000D1C75 /* The_Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Basic.swift; sourceTree = "<group>"; };
+		FD2357B6207E4DC7000D1C75 /* TheBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBasic.swift; sourceTree = "<group>"; };
 		FD29C0F0209214C300E8CA59 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		FD57E861208F6A1500A021AC /* CollectionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTypes.swift; sourceTree = "<group>"; };
 		FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 		FD2357B5207E4D4F000D1C75 /* SwiftGuide */ = {
 			isa = PBXGroup;
 			children = (
-				FD2357B6207E4DC7000D1C75 /* The_Basic.swift */,
-				FD069D442088CD27009938E5 /* Basic_Operators.swift */,
+				FD2357B6207E4DC7000D1C75 /* TheBasic.swift */,
+				FD069D442088CD27009938E5 /* BasicOperators.swift */,
 				FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */,
 				FD57E861208F6A1500A021AC /* CollectionTypes.swift */,
 				FD06782B2090B897009C477F /* ControlFlow.swift */,
@@ -288,10 +288,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD069D452088CD27009938E5 /* Basic_Operators.swift in Sources */,
+				FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */,
 				FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */,
 				FDB7F77E209366F300B75623 /* Closures.swift in Sources */,
-				FD2357B7207E4DC7000D1C75 /* The_Basic.swift in Sources */,
+				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
 				FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */,
 				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,
 				FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */,
