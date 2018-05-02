@@ -12,8 +12,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray = ["The_Basic",
-                     "Basic_Operators",
+    var dataArray = ["TheBasic",
+                     "BasicOperators",
                      "StringsAndCharacters",
                      "CollectionTypes",
                      "ControlFlow",
