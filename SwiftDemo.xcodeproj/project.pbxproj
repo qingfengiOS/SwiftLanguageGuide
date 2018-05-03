@@ -19,6 +19,7 @@
 		FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2357B6207E4DC7000D1C75 /* TheBasic.swift */; };
 		FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C0F0209214C300E8CA59 /* Functions.swift */; };
 		FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD57E861208F6A1500A021AC /* CollectionTypes.swift */; };
+		FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD65A85E209B3D6900869121 /* Enumerations.swift */; };
 		FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */; };
 		FDB7F77E209366F300B75623 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB7F77D209366F300B75623 /* Closures.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		FD2357B6207E4DC7000D1C75 /* TheBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBasic.swift; sourceTree = "<group>"; };
 		FD29C0F0209214C300E8CA59 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		FD57E861208F6A1500A021AC /* CollectionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTypes.swift; sourceTree = "<group>"; };
+		FD65A85E209B3D6900869121 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
 		FDB7F77D209366F300B75623 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 				FD06782B2090B897009C477F /* ControlFlow.swift */,
 				FD29C0F0209214C300E8CA59 /* Functions.swift */,
 				FDB7F77D209366F300B75623 /* Closures.swift */,
+				FD65A85E209B3D6900869121 /* Enumerations.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */,
 				FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */,
 				FDB7F77E209366F300B75623 /* Closures.swift in Sources */,
+				FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */,
 				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
 				FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */,
 				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,

@@ -18,7 +18,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "CollectionTypes",
                      "ControlFlow",
                      "Functions",
-                     "Closures"
+                     "Closures",
+                     "Enumerations",
                     ]
     
     
@@ -62,8 +63,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             instance.completionHandlers.first?()
             print(instance.x)
-            
             self.navigationController? .pushViewController(instance as UIViewController, animated: true)
+        case 7:
+            self.navigationController? .pushViewController(Enumerations() as UIViewController, animated: true)
             
         default: break
         }
