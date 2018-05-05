@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD05BE1B209DD85900907338 /* ClassesAndStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */; };
 		FD06782C2090B897009C477F /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06782B2090B897009C477F /* ControlFlow.swift */; };
 		FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD069D442088CD27009938E5 /* BasicOperators.swift */; };
 		FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235787207E49CB000D1C75 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesAndStructures.swift; sourceTree = "<group>"; };
 		FD06782B2090B897009C477F /* ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlFlow.swift; sourceTree = "<group>"; };
 		FD069D442088CD27009938E5 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
 		FD235784207E49CB000D1C75 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				FD29C0F0209214C300E8CA59 /* Functions.swift */,
 				FDB7F77D209366F300B75623 /* Closures.swift */,
 				FD65A85E209B3D6900869121 /* Enumerations.swift */,
+				FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,
 				FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */,
 				FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */,
+				FD05BE1B209DD85900907338 /* ClassesAndStructures.swift in Sources */,
 				FD06782C2090B897009C477F /* ControlFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
