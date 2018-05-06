@@ -23,6 +23,7 @@
 		FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD65A85E209B3D6900869121 /* Enumerations.swift */; };
 		FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */; };
 		FDB7F77E209366F300B75623 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB7F77D209366F300B75623 /* Closures.swift */; };
+		FDEABE7E209F324700280872 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEABE7D209F324700280872 /* Properties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		FD65A85E209B3D6900869121 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
 		FDB7F77D209366F300B75623 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		FDEABE7D209F324700280872 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				FDB7F77D209366F300B75623 /* Closures.swift */,
 				FD65A85E209B3D6900869121 /* Enumerations.swift */,
 				FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */,
+				FDEABE7D209F324700280872 /* Properties.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDEABE7E209F324700280872 /* Properties.swift in Sources */,
 				FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */,
 				FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */,
 				FDB7F77E209366F300B75623 /* Closures.swift in Sources */,

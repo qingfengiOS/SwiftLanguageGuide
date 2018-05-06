@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "Closures",
                      "Enumerations",
                      "ClassesAndStructures",
+                     "Properties",
                     ]
     
     
@@ -69,6 +70,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.navigationController? .pushViewController(Enumerations() as UIViewController, animated: true)
         case 8:
             self.navigationController? .pushViewController(ClassesAndStructures() as UIViewController, animated: true)
+        case 9:
+            self.navigationController? .pushViewController(Properties() as UIViewController, animated: true)
             
         default: break
         }
