@@ -53,6 +53,7 @@ class Properties: UIViewController {
         //如果创建了一个结构体的实例并将其赋值给一个常量，则无法修改该实例的任何属性，即使有属性被声明为变量也不行
  
         let rangeOfFourItems = FixedLengthRange(firstValue: 0, length: 4)
+        print(rangeOfFourItems)
 //        rangeOfFourItems.firstValue = 6// 尽管 firstValue 是个变量属性，这里还是会报错
         
         /*
