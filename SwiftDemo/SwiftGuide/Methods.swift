@@ -20,15 +20,18 @@ class Methods: UIViewController {
         theSelfProperty()
         modifyingValueTypesFromWithinInstanceMethods()
         assigningToSelfWithinMutatingMethod()
+        
+        classMethod()
+        
     }
     
     //MARK:--实例方法
     func instanceMethod() {
         let counter = Counter()
         
-        print(counter.increment())
-        print(counter.increment(by: 5))
-        print(counter.reset())
+        counter.increment()
+        counter.increment(by: 5)
+        counter.reset()
     }
     
     func theSelfProperty() {
@@ -38,7 +41,7 @@ class Methods: UIViewController {
         
         let counter = Counter()
         
-        print(counter.increments())
+        counter.increments()
         /*实际上，你不必在你的代码里面经常写 self 。不论何时，只要在一个方法中使用一个已知的属性或者方法名 称，如果你没有明确地写 self ，Swift 假定你是指当前实例的属性或者方法。这种假定在上面的 Counter 中已经 示范了: Counter 中的三个实例方法中都使用的是 count (而不是 self.count )。
 
          使用这条规则的主要场景是实例方法的某个参数名称与实例的某个属性名称相同的时候。在这种情况下，参数名 称享有优先权，并且在引用属性时必须使用一种更严格的方式。这时你可以使用 self 属性来区分参数名称和属性 名称。
@@ -64,7 +67,25 @@ class Methods: UIViewController {
         var somePoint = ThirdPoint(x: 1.0, y: 1.0)
         somePoint.moveBy(x: 2.0, y: 3.0)
         print("The point is now at (\(somePoint.x), \(somePoint.y))")
+        
+        var ovenLight = TriStateSwitch.Low
+        ovenLight.next()
+        print("-------")
+        ovenLight.next()
     }
+    
+    
+    //类型方法
+    func classMethod() {
+        SomeClas.someTypeMethod()
+        
+        var player = Player(name: "Argyros")
+        player.complete(level: 1)
+        print("highest unlocked level is now \(LevelTracker.highestUnlockedLevel)")
+        
+    }
+    
+    
     
 }
 
@@ -76,20 +97,24 @@ class Counter {
     
     func increment() {
         count += 1
+        print(count)
     }
     
     func increment(by amount: Int) {
         count += amount
+        print(count)
     }
     
     func reset() {
         count = 0
+        print(count)
     }
     
     //MARK:--self 属性
     /// 使用self属性，此方法与increment等价
     func increments() {
         self.count += 1
+        print(self.count)
     }
     
 }
@@ -130,6 +155,81 @@ struct ThirdPoint {
     /*
      新版的可变方法 moveBy(x:y:) 创建了一个新的结构体实例，它的 x 和 y 的值都被设定为目标值。调用这个版本 的方法和调用上个版本的最终结果是一样的。
      */
+}
+
+//枚举的可变方法可以把 self 设置为同一枚举类型中不同的成员:
+enum TriStateSwitch {
+    case Off, Low, Heigh
+    mutating func next() {
+        switch self {
+        case .Off:
+            self = .Low
+        case .Low:
+            self = .Heigh
+        case .Heigh:
+            self = .Off
+        }
+        print(self)
+    }
+    /*
+     上面的例子中定义了一个三态开关的枚举。每次调用 next() 方法时，开关在不同的电源状态( Off ， Low ， h )之间循环切换。
+     */
+}
+
+
+//MARK:--类型方法
+/*
+ 实例方法是被某个类型的实例调用的方法，你也可以定义在类型本身上调用的方法，这种方法及时类型方法。在方法的func关键字之前加上关键字static来指定类型方法。类还可以用关键字 class 来允许子类重写 父类的方法实现。
+ 
+ 在 Objective-C 中，你只能为 Objective-C 的类类型(classes)定义类型方法(type-level methods)。在 Swift 中，你可以为所有的类、结构体和枚举定义类型方法。每一个类型方法都被它所支持的类型显式包含。
+ */
+class SomeClas {
+    class func someTypeMethod() {
+        print("this is class method")
+    }
+}
+
+struct LevelTracker {
+    static var highestUnlockedLevel = 1
+    var currentLevel = 1
+    
+    static func unlock(_ level: Int) {
+        if level > highestUnlockedLevel {
+            highestUnlockedLevel = level
+        }
+    }
+    
+    static func isUnlocked(_ level: Int) -> Bool {
+        return level <= highestUnlockedLevel
+    }
+    
+    
+    mutating func advance(to level: Int) -> Bool {
+        if LevelTracker.isUnlocked(level) {
+            currentLevel = level
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+class Player {
+    //下面,Methods类使用LevelTracker来监测和更新每个玩家的发展进度:
+    var tracker = LevelTracker()
+    var playerName: String = ""
+    func complete(level: Int) {
+        LevelTracker.unlock(level + 1)
+        tracker.advance(to: level + 1)
+    }
+    
+    init(name: String) {
+        playerName = name
+    }
+    /*
+     Player类创建一个新的LevelTracker实例来监测这个用户的进度。它提供了complete(level: Int)方法，一旦玩家 完成某个指定等级就调用它。这个方法为所有玩家解锁下一等级，并且将当前玩家的进度更新为下一等级。(我 们忽略了   返回的布尔值，因为之前调用   时就知道了这个等级已经被解锁 了)。
+     */
+    
 }
 
 
