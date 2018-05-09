@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "ClassesAndStructures",
                      "Properties",
                      "Methods",
+                     "Subscripts",
                     ]
     
     
@@ -75,6 +76,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.navigationController? .pushViewController(Properties() as UIViewController, animated: true)
         case 10:
             self.navigationController? .pushViewController(Methods() as UIViewController, animated: true)
+        case 11:
+            self.navigationController? .pushViewController(Subscripts() as UIViewController, animated: true)
             
         default: break
         }
