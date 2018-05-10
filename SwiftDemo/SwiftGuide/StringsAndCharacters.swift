@@ -2,7 +2,7 @@
 //  StringsAndCharacters.swift
 //  SwiftDemo
 //
-//  Created by liyiping on 2018/4/21.
+//  Created by qingfeng on 2018/4/21.
 //  Copyright © 2018年 情风. All rights reserved.
 //
 
