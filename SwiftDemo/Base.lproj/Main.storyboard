@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Swift-->
+        <!--Swift Guide-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,14 +37,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Swift" id="ped-Gn-PzU"/>
+                    <navigationItem key="navigationItem" title="Swift Guide" id="ped-Gn-PzU"/>
                     <connections>
                         <outlet property="tableView" destination="Nzm-eL-cy2" id="nuf-i6-zQ1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="31.934032983508249"/>
+            <point key="canvasLocation" x="780" y="390"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3OE-xr-bCZ">
