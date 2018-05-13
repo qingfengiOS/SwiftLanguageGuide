@@ -10,6 +10,7 @@
 		FD05BE1B209DD85900907338 /* ClassesAndStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */; };
 		FD06782C2090B897009C477F /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06782B2090B897009C477F /* ControlFlow.swift */; };
 		FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD069D442088CD27009938E5 /* BasicOperators.swift */; };
+		FD0CD85020A86913006E5D16 /* Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0CD84F20A86913006E5D16 /* Initialization.swift */; };
 		FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235787207E49CB000D1C75 /* AppDelegate.swift */; };
 		FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235789207E49CB000D1C75 /* ViewController.swift */; };
 		FD23578D207E49CB000D1C75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD23578B207E49CB000D1C75 /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesAndStructures.swift; sourceTree = "<group>"; };
 		FD06782B2090B897009C477F /* ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlFlow.swift; sourceTree = "<group>"; };
 		FD069D442088CD27009938E5 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
+		FD0CD84F20A86913006E5D16 /* Initialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initialization.swift; sourceTree = "<group>"; };
 		FD235784207E49CB000D1C75 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD235787207E49CB000D1C75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD235789207E49CB000D1C75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				FD515F1920A08C3A00CAA959 /* Methods.swift */,
 				FD2EB4D520A335E10013255E /* Subscripts.swift */,
 				FD4C20E720A7128E00B21393 /* Inheritance.swift */,
+				FD0CD84F20A86913006E5D16 /* Initialization.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				FDB7F77E209366F300B75623 /* Closures.swift in Sources */,
 				FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */,
 				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
+				FD0CD85020A86913006E5D16 /* Initialization.swift in Sources */,
 				FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */,
 				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,
 				FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */,
