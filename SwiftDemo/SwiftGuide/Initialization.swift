@@ -49,8 +49,33 @@ class Initialization: UIViewController {
         beetsQuestion.ask()// 打印 "How about beets?"
         beetsQuestion.response = "I also like beets. (But not with cheese.)"
         
+        
         let item = ShoppingListItem()
         print(item)
+        
+        
+        let twoByTwo = Size2(width: 2.0, height: 2.0)
+        print(twoByTwo)
+        
+        /*
+         第一个 Rect 构造器 init() ，在功能上跟没有自定义构造器时自动获得的默认构造器是一样的。这个构造器是一 个空函数，使用一对大括号 {} 来表示，它没有执行任何构造过程。调用这个构造器将返回一个 Rect 实例，它的
+         origin 和 size 属性都使用定义时的默认值 Point(x: 0.0, y: 0.0) 和 Size(width: 0.0, height: 0.0)
+         */
+        let basicRect = Rect3()// basicRect 的 origin 是 (0.0, 0.0)，size 是 (0.0, 0.0)
+        print(basicRect)
+        
+        /*
+         第二个 Rect 构造器 init(origin:size:) ，在功能上跟结构体在没有自定义构造器时获得的逐一成员构造器是一 样的。这个构造器只是简单地将 origin 和 size 的参数值赋给对应的存储型属性:
+         */
+        let originRect = Rect3(origin: Point3(x: 2.0, y: 2.0),size: Size3(width: 5.0, height: 5.0))
+        print(originRect)
+        
+        /*
+         第三个 Rect 构造器 init(center:size:) 稍微复杂一点。它先通过 center 和 size 的值计算出 origin 的坐标，然 后再调用(或者说代理给) init(origin:size:) 构造器来将新的 origin 和 size 值赋值到对应的属性中:
+         */
+        let centerRect = Rect3(center: Point3(x: 4.0, y: 4.0), size: Size3(width: 3.0, height: 3.0))// centerRect 的 origin 是 (2.5, 2.5)，size 是 (3.0, 3.0)
+        print(centerRect)
+        
     }
 
 
@@ -172,6 +197,71 @@ class ShoppingListItem {
 
      */
 }
+
+//MARK:--结构体的逐一成员构造器
+/*
+ 除了上面提到的默认构造器，如果结构体没有提供自定义的构造器，它们将自动获得一个逐一成员构造器，即使
+ 结构体的存储型属性没有默认值。
+ 
+ 逐一成员构造器是用来初始化结构体新实例里成员属性的快捷方法。我们在调用逐一成员构造器时，通过与成员
+ 属性名相同的参数名进行传值来完成对成员属性的初始赋值。
+ */
+struct Size2 {
+    var width = 0.0, height = 0.0
+}
+
+//MARK:--值类型的构造器代理
+/*
+ 构造器可以通过调用其它构造器来完成实例的部分构造过程。这一过程称为构造器代理，它能减少多个构造器间
+ 的代码重复。
+ 
+ 构造器代理的实现规则和形式在值类型和类类型中有所不同。值类型(结构体和枚举类型)不支持继承，所以构 造器代理的过程相对简单，因为它们只能代理给自己的其它构造器。类则不同，它可以继承自其它类(请参考继 承)，这意味着类有责任保证其所有继承的存储型属性在构造时也能正确的初始化。
+ 
+ 对于值类型，你可以使用 self.init 在自定义的构造器中引用相同类型中的其它构造器。并且你只能在构造器内 部调用 self.init 。
+
+ 如果你为某个值类型定义了一个自定义的构造器，你将无法访问到默认构造器(如果是结构体，还将无法访问逐 一成员构造器)。这种限制可以防止你为值类型增加了一个额外的且十分复杂的构造器之后,仍然有人错误的使用 自动生成的构造器
+ */
+struct Size3 {
+    var width = 0.0, height = 0.0
+}
+
+struct Point3 {
+    var x = 0.0, y = 0.0
+}
+
+struct Rect3 {
+    var origin = Point3()
+    var size = Size3()
+    init() {
+        
+    }
+    
+    init(origin: Point3, size: Size3) {
+        self.origin = origin
+        self.size = size
+    }
+    
+    init(center: Point3, size: Size3) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: Point3(x: originX, y: originY), size: size)
+    }
+    /*
+     构造器 init(center:size:) 可以直接将 origin 和 size 的新值赋值到对应的属性中。然而，利用恰好提供了相关 功能的现有构造器会更为方便，构造器 init(center:size:) 的意图也会更加清晰。
+     */
+}
+
+
+//MARK:--类的继承和构造过程
+/*
+ 类里面的所有存储型属性——包括所有继承自父类的属性——都必须在构造过程中设置初始值。
+ Swift 为类类型提供了两种构造器来确保实例中所有存储型属性都能获得初始值，它们分别是指定构造器和便利构造器。
+ */
+
+
+
+
+
 
 
 
