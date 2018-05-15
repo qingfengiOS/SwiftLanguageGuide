@@ -76,6 +76,24 @@ class Initialization: UIViewController {
         let centerRect = Rect3(center: Point3(x: 4.0, y: 4.0), size: Size3(width: 3.0, height: 3.0))// centerRect 的 origin 是 (2.5, 2.5)，size 是 (3.0, 3.0)
         print(centerRect)
         
+        
+        let vehicle = Vehicles()
+        print("Vehicle: \(vehicle.description)")
+     
+        
+        let bicycle = Bicycles()
+        print("Bicycle: \(bicycle.description)") // 打印 "Bicycle: 2 wheel(s)"
+        
+        let namedMeat = Food(name: "Bacon") // namedMeat 的名字是 "Bacon”
+        print(namedMeat.name)//Food 类中的构造器 init(name: String) 被定义为一个指定构造器，因为它能确保 Food 实例的所有存储型属性都 被初始化。 Food 类没有父类，所以 init(name: String) 构造器不需要调用 super.init() 来完成构造过程。
+        
+        let mysteryMeat = Food()// mysteryMeat 的名字是 [Unnamed]
+        print(mysteryMeat.name)//
+        
+        let oneMysteryItem = RecipeIngredient()
+        let oneBacon = RecipeIngredient(name: "Bacon")
+        let sixEggs = RecipeIngredient(name: "Eggs", quantity: 6)
+        print(oneMysteryItem.name,oneBacon.name,sixEggs.name,sixEggs.quantity)
     }
 
 
@@ -256,13 +274,127 @@ struct Rect3 {
 /*
  类里面的所有存储型属性——包括所有继承自父类的属性——都必须在构造过程中设置初始值。
  Swift 为类类型提供了两种构造器来确保实例中所有存储型属性都能获得初始值，它们分别是指定构造器和便利构造器。
+ 
+ 指定构造器和便利构造器：
+ 指定构造器是类中最主要的构造器。一个指定构造器将初始化类中提供的所有属性，并根据父类链往上调用父类的构造器来实现父类的初始化。
+ 
+ 便利构造器是类中比较次要的、辅助型的构造器。你可以定义便利构造器来调用同一个类中的指定构造器，并为
+ 其参数提供默认值。你也可以定义便利构造器来创建一个特殊用途或特定输入值的实例。
+ 
+ 你应当只在必要的时候为类提供便利构造器，比方说某种情况下通过使用便利构造器来快捷调用某个指定构造
+ 器，能够节省更多开发时间并让类的构造过程更清晰明了。
  */
 
+/*
+ 类的指定构造器的写法跟值类型简单构造器一样:
+ init(parameters) {
+     statements
+ }
+ 
+ 便利构造器也采用相同样式的写法，但需要在 init 关键字之前放置 convenience 关键字，并使用空格将它们俩分开:
+ convenience init(parameters) {
+     statements
+ }
+ 
+ 类的构造器代理规则
+ 为了简化指定构造器和便利构造器之间的调用关系，Swift 采用以下三条规则来限制构造器之间的代理调用:
+ 规则 1 :指定构造器必须调用其直接父类的的指定构造器。
+ 规则 2 :便利构造器必须调用同类中定义的其它构造器。
+ 规则 3 :便利构造器必须最终导致一个指定构造器被调用。
+ 
+ 一个更方便记忆的方法是:
+ • 指定构造器必须总是向上代理
+ • 便利构造器必须总是横向代理
+ */
 
+//MARK:--两段式构造过程
+/*
+ Swift 中类的构造过程包含两个阶段。第一个阶段，每个存储型属性被引入它们的类指定一个初始值。当每个存储型属性的初始值被确定后，第二阶段开始，它给每个类一次机会，在新实例准备使用之前进一步定制它们的存储型属性。
+ 
+ 两段式构造过程的使用让构造过程更安全，同时在整个类层级结构中给予了每个类完全的灵活性。两段式构造过程可以防止属性值在初始化之前被访问，也可以防止属性被另外一个构造器意外地赋予不同的值。
+ 
+ 安全检查 1: 指定构造器必须保证它所在类引入的所有属性都必须先初始化完成，之后才能将其它构造任务向上代理给父类中的构造器。
+ 如上所述，一个对象的内存只有在其所有存储型属性确定之后才能完全初始化。为了满足这一规则，指定构造器必须保证它所在类引入的属性在它往上代理之前先完成初始化。
+ 
+ 安全检查 2: 指定构造器必须先向上代理调用父类构造器，然后再为继承的属性设置新值。如果没这么做，指定构造器赋予的 新值将被父类中的构造器所覆盖。
+ 
+ 安全检查 3: 便利构造器必须先代理调用同一类中的其它构造器，然后再为任意属性赋新值。如果没这么做，便利构造器赋予 的新值将被同一类中其它指定构造器所覆盖。
+ 安全检查 4:构造器在第一阶段构造完成之前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 self 作为一个 值。类实例在第一阶段结束以前并不是完全有效的。只有第一阶段完成后，该实例才会成为有效实例，才能访问属性和调用方法。
 
+ */
 
+//MARK:--构造器的继承和重写
+/*
+ 跟Objective-C中的子类不同，Swift中的子类默认情况下不会继承父类的构造器。Swift 的这种机制可以防止一个父类的简单构造器被一个更精细的子类继承，并被错误地用来创建子类的实例。
+ 
+ 当你在编写一个和父类中指定构造器相匹配的子类构造器时，你实际上是在重写父类的这个指定构造器。因此，你必须在定义子类构造器时带上override修饰符。即使你重写的是系统自动提供的默认构造器，也需要带上override修饰符
+ */
+class Vehicles {
+    var numberOfWheels = 0
+    var description: String {
+        return "\(numberOfWheels) wheel(s)"
+    }
+    /*
+     Vehicles类只为存储型属性提供默认值，而不自定义构造器。因此，它会自动获得一个默认构造器,自动获得的默认构造器总会是类中的指定构造器，它可以用于创建numberOfWheels为0的Vehicles实例
+     */
+}
 
+class Bicycles: Vehicles {
+    override init() {
+        super.init()
+        numberOfWheels = 2
+    }
+    /*
+     子类 Bicycle 定义了一个自定义指定构造器 init() 。这个指定构造器和父类的指定构造器相匹配，所以 Bicycle 中的指定构造器需要带上 override 修饰符。
+     
+     Bicycle 的构造器 init() 以调用 super.init() 方法开始，这个方法的作用是调用 Bicycle 的父类 Vehicle 的默 认构造器。这样可以确保 Bicycle 在修改属性之前，它所继承的属性 numberOfWheels 能被 Vehicle 类初始化。在 调用 super.init() 之后，属性 numberOfWheels 的原值被新值 2 替换。
+     */
+}
 
+//MARK:--构造器的自动继承
+/*
+ 如上所述，子类在默认情况下不会继承父类的构造器。但是如果满足特定条件，父类构造器是可以被自动继承的。在实践中，这意味着对于许多常见场景你不必重写父类的构造器，并且可以在安全的情况下以最小的代价继承父类的构造器。
+ 
+ 假设你为子类中引入的所有新属性都提供了默认值，以下 2 个规则适用:
+ 规则 1: 如果子类没有定义任何指定构造器，它将自动继承所有父类的指定构造器。
+ 规则 2:如果子类提供了所有父类指定构造器的实现——无论是通过规则 1 继承过来的，还是提供了自定义实现——它将 自动继承所有父类的便利构造器。(对于规则 2，子类可以将父类的指定构造器实现为便利构造器。)
+ 
+ 即使你在子类中添加了更多的便利构造器，这两条规则仍然适用。
+ */
 
+//MARK:--指定构造器和便利构造器实践
+/*
+ 接下来的例子将在实践中展示指定构造器、便利构造器以及构造器的自动继承。这个例子定义了包含三个类 Foo d 、 RecipeIngredient 以及 ShoppingListItem 的类层次结构，并将演示它们的构造器是如何相互作用的。
+ 类层次中的基类是 Food ，它是一个简单的用来封装食物名字的类。 Food 类引入了一个叫做 name 的 String 类型 的属性，并且提供了两个构造器来创建 Food 实例:
+ */
+class Food {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    
+    convenience init() {
+        self.init(name: "[Unnamed]")
+    }
+}
 
+class RecipeIngredient: Food {
+    var quantity: Int
+    init(name: String, quantity: Int) {
+        self.quantity = quantity
+        super.init(name: name)
+    }
+    
+    override convenience init(name: String) {
+        self.init(name: name, quantity: 1)
+    }
+}
 
+class ShoppingListItems: RecipeIngredient {
+    var purchased = false
+    var description: String {
+        var output = "\(quantity) x \(name)"
+        output += purchased ? " ?" : " ?"
+        return output
+    }
+}
