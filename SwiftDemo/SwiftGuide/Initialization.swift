@@ -94,9 +94,58 @@ class Initialization: UIViewController {
         let oneBacon = RecipeIngredient(name: "Bacon")
         let sixEggs = RecipeIngredient(name: "Eggs", quantity: 6)
         print(oneMysteryItem.name,oneBacon.name,sixEggs.name,sixEggs.quantity)
+        
+        let someCreature = Animal(species: "Giraffe") // someCreature 的类型是 Animal? 而不是 Animal
+        if let giraffe = someCreature {
+            print("An animal was initialized with a species of \(giraffe.species)")// 打印 "An animal was initialized with a species of Giraffe"
+        }
+        
+        let anonymousCreature = Animal(species: "")// anonymousCreature 的类型是 Animal?, 而不是 Animal
+        if anonymousCreature == nil {
+            print("The anonymous creature could not be initialized")// 打印 "The anonymous creature could not be initialized"
+        }
+        
+        let fahrenheitUnit = TemperatureUnit(symbol: "F")
+        if fahrenheitUnit != nil {
+            print("This is a defined temperature unit, so initialization succeeded.")
+        }
+        
+        let unknownUnit = TemperatureUnit(symbol: "X")
+        if unknownUnit == nil {
+            print("This is not a defined temperature unit, so initialization failed.")
+        }
+        
+        let kelvin = TemperatureUniter(rawValue: "K")
+        if kelvin != nil {
+            print("This is a defined temperature unit, so initialization succeeded.")
+        }
+        
+        let unknownUniter = TemperatureUniter(rawValue: "X")
+        if unknownUniter == nil {
+            print("This is not a defined temperature unit, so initialization failed.")
+        }
+        
+        if let twoSocks = CartItem(name: "sock", quantity: 2) {//倘若你以一个值为 0 的 quantity 来创建一个 CartItem 实例，那么将导致 CartItem 构造器失败:
+            print("Item: \(twoSocks.name), quantity: \(twoSocks.quantity)")
+        }
+        
+        if let zeroShirts = CartItem(name: "shirt", quantity: 0) {//倘若你以一个值为 0 的 quantity 来创建一个 CartItem 实例，那么将导致 CartItem 构造器失败:
+            print("Item: \(zeroShirts.name), quantity: \(zeroShirts.quantity)")
+        } else {
+            print("Unable to initialize zero shirts")
+        }
+        
+        if let oneUnnamed = CartItem(name: "", quantity: 1) {//同样地，如果你尝试传入一个值为空字符串的 name 来创建一个 CartItem 实例，那么将导致父类 Product 的 构造过程失败
+            print("Item: \(oneUnnamed.name), quantity: \(oneUnnamed.quantity)")
+        } else {
+            print("Unable to initialize one unnamed product")
+        }
+        
+        let board = Checkboard()
+        print(board.squareIsBlackAtRow(row: 0, column: 1))// 打印 "true"
+        print(board.squareIsBlackAtRow(row: 7, column: 7))// 打印 "false"
+        
     }
-
-
 }
 
 //MARK:--存储属性的初始赋值
@@ -377,7 +426,6 @@ class Food {
         self.init(name: "[Unnamed]")
     }
 }
-
 class RecipeIngredient: Food {
     var quantity: Int
     init(name: String, quantity: Int) {
@@ -396,5 +444,171 @@ class ShoppingListItems: RecipeIngredient {
         var output = "\(quantity) x \(name)"
         output += purchased ? " ?" : " ?"
         return output
+    }
+}
+
+
+//MARK:--可失败构造器
+/*
+ 如果一个类、结构体或枚举类型的对象，在构造过程中有可能失败，则为其定义一个可失败构造器。这里所指的“失败”是指，如给构造器传入无效的参数值，或缺少某种所需的外部资源，又或是不满足某种必要的条件等。
+ 
+ 为了妥善处理这种构造过程中可能会失败的情况。你可以在一个类，结构体或是枚举类型的定义中，添加一个或 多个可失败构造器。其语法为在 init 关键字后面添加问号( init? )。
+ */
+struct Animal {
+    let species: String
+    init?(species: String) {
+        if species.isEmpty {
+            return nil
+        }
+        
+        self.species = species
+    }
+}
+
+//MARK:--枚举类型的可失败构造器
+/*
+ 你可以通过一个带一个或多个参数的可失败构造器来获取枚举类型中特定的枚举成员。如果提供的参数无法匹配任何枚举成员，则构造失败。
+ */
+enum TemperatureUnit {
+    case Kelvin, Celius, Fahrenheit
+    init?(symbol: Character) {
+        switch symbol {
+        case "K":
+            self = .Kelvin
+        case "C":
+            self = .Celius
+        case "F":
+            self = .Fahrenheit
+        default:
+            return nil
+        }
+    }
+}
+
+
+//MARK:--带原始值的枚举类型的可失败构造器
+/*
+ 带原始值的枚举类型会自带一个可失败构造器 init?(rawValue:) ，该可失败构造器有一个名为 rawValue 的参 数，其类型和枚举类型的原始值类型一致，如果该参数的值能够和某个枚举成员的原始值匹配，则该构造器会构 造相应的枚举成员，否则构造失败。
+ */
+enum TemperatureUniter: Character {
+    case kelvin = "K", celiue = "C", fahrenheit = "F"
+}
+
+
+//MARK:--构造失败的传递
+/*
+ 类，结构体，枚举的可失败构造器可以横向代理到类型中的其他可失败构造器。类似的，子类的可失败构造器也能向上代理到父类的可失败构造器。无论是向上代理还是横向代理，如果你代理到的其他可失败构造器触发构造失败，整个构造过程将立即终止，接 下来的任何构造代码不会再被执行。
+ */
+class Product {
+    let name: String
+    init?(name: String) {
+        if name.isEmpty {
+            return nil
+        }
+        
+        self.name = name
+    }
+}
+
+class CartItem: Product {
+    let quantity: Int
+    init?(name: String ,quantity: Int) {
+        if quantity < 1 { return nil }
+        
+        self.quantity = quantity
+        super.init(name: name)
+    }
+    /*
+     CartItem 可失败构造器首先验证接收的 quantity 值是否大于等于 1 。倘若 quantity 值无效，则立即终止 整个构造过程，返回失败结果，且不再执行余下代码。同样地，Product 的可失败构造器首先检查 name 值，假如 name 值为空字符串，则构造器立即执行失败。
+     */
+}
+
+//MARK:--重写一个可失败构造器
+/*
+ 如同其它的构造器，你可以在子类中重写父类的可失败构造器。或者你也可以用子类的非可失败构造器重写一个父类的可失败构造器。这使你可以定义一个不会构造失败的子类，即使父类的构造器允许构造失败。注意，当你用子类的非可失败构造器重写父类的可失败构造器时，向上代理到父类的可失败构造器的唯一方式是对父类的可失败构造器的返回值进行强制解包。
+ */
+class Document {
+    var name: String?
+    init() {}
+    init?(name: String) {
+        self.name = name
+        if name.isEmpty {
+            return nil
+        }
+    }
+    //下面这个例子，定义了一个 Document 类的子类 AutomaticallyNamedDocument 。这个子类重写了父类的两个指定构 造器，确保了无论是使用 init() 构造器，还是使用 init(name:) 构造器并为参数传递空字符串，生成的实例中的name 属性总有初始 "[Untitled]"   :
+}
+
+class AutomaticallyNamedDocument: Document {
+    override init() {
+        super.init()
+        self.name = "[Untitled]"
+    }
+    
+    override init?(name: String) {
+        super.init()
+        if name.isEmpty {
+            self.name = "[Untitled]"
+        } else {
+            self.name = name
+        }
+    }
+    //AutomaticallyNamedDocument 用一个非可失败构造器 init(name:) 重写了父类的可失败构造器 init?(name:) 。因 为子类用另一种方式处理了空字符串的情况，所以不再需要一个可失败构造器，因此子类用一个非可失败构造器 代替了父类的可失败构造器。
+}
+
+class UntitledDocument: Document {
+    override init() {
+        super.init(name: "[Untitled]")!
+    }
+    //在这个例子中，如果在调用父类的可失败构造器 init?(name:) 时传入的是空字符串，那么强制解包操作会引发运 行时错误。不过，因为这里是通过非空的字符串常量来调用它，所以并不会发生运行时错误。
+}
+
+//MARK:--可失败构造器 init!
+/*
+ 通常来说我们通过在 init 关键字后添加问号的方式( init? )来定义一个可失败构造器，但你也可以通过在init后面添加惊叹号的方式来定义一个可失败构造器( init!)，该可失败构造器将会构建一个对应类型的隐式解 包可选类型的对象。你可以在 init? 中代理到 init! ，反之亦然。你也可以用 init? 重写 init! ，反之亦然。你还可以用 init 代理 到 init! ，不过，一旦 init! 构造失败，则会触发一个断言。
+
+ */
+
+//MARK:--必要构造器
+//在类的构造器前添加 required 修饰符表明所有该类的子类都必须实现该构造器
+
+//MARK:--通过闭包或函数设置属性的默认值
+/*
+ 如果某个存储型属性的默认值需要一些定制或设置，你可以使用闭包或全局函数为其提供定制的默认值。每当某个属性所在类型的新实例被创建时，对应的闭包或函数会被调用，而它们的返回值会当做默认值赋值给这个属性。
+ 
+ 这种类型的闭包或函数通常会创建一个跟属性类型相同的临时变量，然后修改它的值以满足预期的初始状态，最后返回这个临时变量，作为属性的默认值。
+ */
+class AnyClass {
+    let someProperty: String = {
+        // 在这个闭包中给 someProperty 创建一个默认值
+        // someValue 必须和 SomeType 类型相同
+        let someValue: String = "initialize"
+        return someValue
+    }()
+    //注意闭包结尾的大括号后面接了一对空的小括号。这用来告诉 Swift 立即执行此闭包。如果你忽略了这对括 号，相当于将闭包本身作为值赋值给了属性，而不是将闭包的返回值赋值给属性。
+}
+
+/*
+ 西洋跳棋游戏在一副黑白格交替的 10x10 的棋盘中进行。为了呈现这副游戏棋盘， Checkerboard 结构体定义了一 个属性 boardColors ，它是一个包含 100 个 Bool 值的数组。在数组中，值为 true 的元素表示一个黑格，值为 fa lse 的元素表示一个白格。数组中第一个元素代表棋盘上左上角的格子，最后一个元素代表棋盘上右下角的格 子。
+ 
+ boardColor 数组是通过一个闭包来初始化并设置颜色值的:
+ */
+struct Checkboard {
+    let boardColors: [Bool] = {
+        var temporaryBoard = [Bool]()
+        
+        var isBlack = false
+        for i in 1...8 {
+            for j in 1...8 {
+                temporaryBoard.append(isBlack)
+                isBlack = !isBlack
+            }
+            isBlack = !isBlack
+        }
+        return temporaryBoard
+    }()
+    
+    func squareIsBlackAtRow(row: Int, column: Int) -> Bool {
+        return boardColors[(row * 8) + column]
     }
 }
