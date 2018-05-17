@@ -26,6 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "Subscripts",
                      "Inheritance",
                      "Initialization",
+                     "Deinitialization",
                     ]
     
     
@@ -51,44 +52,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        switch indexPath.row {
-        case 0: self.navigationController? .pushViewController(TheBasic() as UIViewController, animated: true)
-        case 1: self.navigationController? .pushViewController(BasicOperators() as UIViewController, animated: true)
-        case 2:
-            self.navigationController? .pushViewController(StringsAndCharacters() as UIViewController, animated: true)
-        case 3:
-            self.navigationController? .pushViewController(CollectionTypes() as UIViewController, animated: true)
-        case 4:
-            self.navigationController? .pushViewController(ControlFlow() as UIViewController, animated: true)
-        case 5:
-            self.navigationController? .pushViewController(Functions() as UIViewController, animated: true)
-        case 6:
-            let instance = Closures()
-            instance.doSomethig()
-            print(instance.x)
-            
-            instance.completionHandlers.first?()
-            print(instance.x)
-            self.navigationController? .pushViewController(instance as UIViewController, animated: true)
-        case 7:
-            self.navigationController? .pushViewController(Enumerations() as UIViewController, animated: true)
-        case 8:
-            self.navigationController? .pushViewController(ClassesAndStructures() as UIViewController, animated: true)
-        case 9:
-            self.navigationController? .pushViewController(Properties() as UIViewController, animated: true)
-        case 10:
-            self.navigationController? .pushViewController(Methods() as UIViewController, animated: true)
-        case 11:
-            self.navigationController? .pushViewController(Subscripts() as UIViewController, animated: true)
-        case 12:
-            self.navigationController? .pushViewController(Inheritance() as UIViewController, animated: true)
-        case 13:
-            self.navigationController? .pushViewController(Initialization() as UIViewController, animated: true)
-        default: break
-        }
-        
+        let viewController = getViewContrlooerByClassName(className: self.dataArray[indexPath.row])
+        self.navigationController? .pushViewController(viewController!, animated: true)
     }
     
+    //MARK:--通过类名初始化VC
+    func getViewContrlooerByClassName(className: String) -> UIViewController? {
+        
+        guard let nameSpace = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
+            return nil
+        }
+        guard let vcName = NSClassFromString(nameSpace + "." + className) else {
+            return nil
+        }
+        guard let type = vcName as? UIViewController.Type else {
+            return nil
+        }
+        let viewController = type.init()
+        
+        return viewController
+        
+    }
     
 }
 

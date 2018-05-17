@@ -27,6 +27,7 @@
 		FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD65A85E209B3D6900869121 /* Enumerations.swift */; };
 		FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */; };
 		FDB7F77E209366F300B75623 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB7F77D209366F300B75623 /* Closures.swift */; };
+		FDBF8CC720ADA19A00753110 /* Deinitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBF8CC620ADA19A00753110 /* Deinitialization.swift */; };
 		FDEABE7E209F324700280872 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEABE7D209F324700280872 /* Properties.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		FD65A85E209B3D6900869121 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
 		FDB7F77D209366F300B75623 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		FDBF8CC620ADA19A00753110 /* Deinitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deinitialization.swift; sourceTree = "<group>"; };
 		FDEABE7D209F324700280872 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +173,7 @@
 				FD2EB4D520A335E10013255E /* Subscripts.swift */,
 				FD4C20E720A7128E00B21393 /* Inheritance.swift */,
 				FD0CD84F20A86913006E5D16 /* Initialization.swift */,
+				FDBF8CC620ADA19A00753110 /* Deinitialization.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
 				FD0CD85020A86913006E5D16 /* Initialization.swift in Sources */,
 				FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */,
+				FDBF8CC720ADA19A00753110 /* Deinitialization.swift in Sources */,
 				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,
 				FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */,
 				FD2EB4D620A335E10013255E /* Subscripts.swift in Sources */,
