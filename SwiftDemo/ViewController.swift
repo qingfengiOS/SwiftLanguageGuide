@@ -71,7 +71,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let viewController = type.init()
         
         return viewController
-        
     }
     
 }
