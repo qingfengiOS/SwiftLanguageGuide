@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "Initialization",
                      "Deinitialization",
                      "OptionalChaining",
+                     "ErrorHandling",
                     ]
     
     
