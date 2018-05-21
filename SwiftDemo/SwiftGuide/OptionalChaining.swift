@@ -80,6 +80,29 @@ class OptionalChaining: UIViewController {
         return someAddress
     }
     
+    
+    //MARK:--通过可选链式调用调用方法
+    func callingMethodThroughOptionChaining () {
+        let john = Personer2()
+        if john.residence?.printNumberOfRooms() != nil {
+            print("It was possible to print the number of rooms.")
+        } else {
+             print("It was not possible to print the number of rooms.")
+        }
+        
+        let someAddress = Address()
+        someAddress.buildingNumber = "29"
+        someAddress.buildingName = "Acacia Road"
+        if (john.residence?.address = someAddress) != nil {
+            print("It was possible to set the address.")
+        } else {
+            print("It was not possible to set the address.")
+        }
+
+        //MARK:--Accessing Subscripts Through Optional Chaining
+        
+    }
+    
 }
 
 //MARK:--使用可选链式调用代替强制展开
