@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD00DDAF20B7F4C40000BD2E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD00DDAE20B7F4C40000BD2E /* Extensions.swift */; };
 		FD05BE1B209DD85900907338 /* ClassesAndStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */; };
 		FD06782C2090B897009C477F /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06782B2090B897009C477F /* ControlFlow.swift */; };
 		FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD069D442088CD27009938E5 /* BasicOperators.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD00DDAE20B7F4C40000BD2E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FD05BE1A209DD85900907338 /* ClassesAndStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesAndStructures.swift; sourceTree = "<group>"; };
 		FD06782B2090B897009C477F /* ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlFlow.swift; sourceTree = "<group>"; };
 		FD069D442088CD27009938E5 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				FDAEC6AE20B3035900F74325 /* ErrorHandling.swift */,
 				FD0F983F20B591CD000B1412 /* TypeCasting.swift */,
 				FD49F23520B6C11800BC8864 /* NestedTypes.swift */,
+				FD00DDAE20B7F4C40000BD2E /* Extensions.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */,
 				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
 				FDAEC6AF20B3035900F74325 /* ErrorHandling.swift in Sources */,
+				FD00DDAF20B7F4C40000BD2E /* Extensions.swift in Sources */,
 				FD0CD85020A86913006E5D16 /* Initialization.swift in Sources */,
 				FD29C0F1209214C300E8CA59 /* Functions.swift in Sources */,
 				FDBF8CC720ADA19A00753110 /* Deinitialization.swift in Sources */,

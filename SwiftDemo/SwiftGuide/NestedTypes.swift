@@ -2,7 +2,7 @@
 //  NestedTypes.swift
 //  SwiftDemo
 //
-//  Created by 李一平 on 2018/5/24.
+//  by qingfengiOS on 2018/5/24.
 //  Copyright © 2018年 情风. All rights reserved.
 //
 /*
@@ -55,8 +55,17 @@ class NestedTypes: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        
         let theAceOfSpades = BlackjackCard(rank: .ace, suit: .spades)
         print("theAceOfSpades: \(theAceOfSpades.description)")
         // Prints "theAceOfSpades: suit is ♠, value is 1 or 11"
+        
+        referringToNestedTypes()
+    }
+    
+    //MARK:-引用嵌套类型
+    func referringToNestedTypes() {
+        let heartsSymbol = BlackjackCard.Suit.hearts.rawValue;
+        print(heartsSymbol)// heartsSymbol is "♡"
     }
 }
