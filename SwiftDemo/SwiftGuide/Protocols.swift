@@ -278,10 +278,40 @@ class DiceGameTracker: DiceGameDelegate {
      
      无论当前进行的是何种游戏，由于game符合DiceGame协议，可以确保game含有dice属性。因此，在gameDidStart(_:)方法中可以通过传入的game参数类访问dice属性，进而打印dice的sides属性的值。
      */
-    
-    
 }
 
+//MARK:-通过扩展添加协议一致性
+/*
+ 即便无法修改源代码，依然可以通过扩展令已有类型遵循并符合协议。扩展可以为已有类型添加属性、方法、下标以及构造器，因此可以符合协议中的相应要求
+ 
+ 下面这个 TextRepresentable 协议，任何想要通过文本表示一些内容的类型都可以实现该协议。这些想要表 示的内容可以是实例本身的描述，也可以是实例当前状态的文本描述:
+ */
+protocol TextRepresentable {
+    var textualDescription: String { get }
+}
+
+//可以通过扩展，令先前提到的 Dice 类遵循并符合 TextRepresentable 协议:
+extension Dice: TextRepresentable {
+    var textualDescription: String {
+        return "A \(sides) - sided dice"
+    }
+}
+
+//MARK:-通过扩展遵循协议
+//当一个类型已经符合了某个协议中的所有要求，却还没有声明遵循该协议时，可以通过空扩展体的扩展来遵循该协议
+struct Hamster {
+    var name: String
+    var textualDescription: String {
+        return "A hamster named \(name)"
+    }
+}
+
+extension Hamster: TextRepresentable{
+    //从现在起，Hamster 的实例可以作为 TextRepresentable 类型使用:
+}
+
+//MARK:-协议的继承
+//协议能够继承一个或多个其他协议，可以在继承的协议的基础上增加新的要求。协议的继承语法与类的继承相似，多个被继承的协议间用逗号分隔
 
 //MARK:-Main ViewController
 class Protocols: UIViewController {
@@ -325,8 +355,24 @@ class Protocols: UIViewController {
         let game = SnakesAndLadders()
         game.delegate = tracker
         game.play()
+        
+        let d12 = Dice(side: 12, generator: LinearCongruentialGenerator())
+        print(d12.textualDescription)
+        
+        let simonTheHanster = Hamster(name: "Simon")
+        let somethingTextRepresentable: TextRepresentable = simonTheHanster
+        print(somethingTextRepresentable.textualDescription)
+        print("------------------------------------------")
+        //MARK:-协议类型的集合
+        //协议类型可以在数组或者字典这样的集合中使用，下面的例子创建了一个 元素类型为 TextRepresentable 的数组:
+        let things: [TextRepresentable] = [d12, simonTheHanster]
+        for thing in things {
+            print(thing.textualDescription)
+        }
+        
     }
     
+  
 }
 
 
