@@ -312,10 +312,90 @@ extension Hamster: TextRepresentable{
 
 //MARK:-协议的继承
 //协议能够继承一个或多个其他协议，可以在继承的协议的基础上增加新的要求。协议的继承语法与类的继承相似，多个被继承的协议间用逗号分隔
+protocol InheritingProtocol: SomesProtocol, OtherProtocol {
+     // protocol definition goes here
+}
+
+protocol PrettyTextRepresentable: TextRepresentable {
+    var prettyTextualDescription: String {get}
+}
+
+extension SnakesAndLadders: PrettyTextRepresentable {
+    var textualDescription: String {
+        return "textualDescription"
+    }
+    
+    var prettyTextualDescription: String {
+        var output = textualDescription + ":\n"
+        for index in 1...finalSquare {
+            switch board[index] {
+            case let ladder where ladder > 0:
+                output += "▲ "
+            case let snake where snake < 0:
+                output += "▼ "
+            default:
+                output += "○ "
+            }
+        }
+        return output
+    }
+    /*
+     上述扩展令 SnakesAndLadders 遵循了 PrettyTextRepresentable 协议，并提供了协议要求的
+     prettyTextualDescription 属性。每个 PrettyTextRepresentable 类型同时也是 TextRepresentable 类型，所以在 tualDescription 的实现中，可以访问prettyTextextualDescription 属性。然后，拼接上了冒号和换行符。接着，遍历 数组中的元素，拼接一个几何图形来表示每个棋盘方格的内容:
+     
+     • 当从数组中取出的元素的值大于 0 时，用 ▲ 表示。
+     • 当从数组中取出的元素的值小于 0 时，用 ▼ 表示。
+     • 当从数组中取出的元素的值等于 0 时，用 ○ 表示。
+     */
+}
+
+//MARK:-类类型专属协议
+//在协议的继承列表中，通过添加 class 关键字来限制协议只能被类类型遵循，而结构体或枚举不能遵循 该协议。class 关键字必须第一个出现在协议的继承列表中，在其他继承的协议之前:
+protocol SomeProtocolOnlyProtocol: class, SomesProtocol {
+    // 这里是类类型专属协议的定义部分
+
+/*
+ 在以上例子中，协议 SomeClassOnlyProtocol 只能被类类型遵循。如果尝试让结构体或枚举类型遵循该协议，则 会导致编译错误。
+     
+     当协议定义的要求需要遵循协议的类型必须是引用语义而非值语义时，应该采用类类型专属协议。关于引用语义 和值语义的更多内容，请查看:结构体和枚举是值类型和类是引用类型。
+ */
+}
+
+
+//MARK:-协议合成
+/*
+ 有时候需要同时遵循多个协议，你可以将多个协议采用 SomeProtocol & AnotherProtocol 这样的格式进行组合，称为 协议合成(protocol composition)。你可以罗列任意多个你想要遵循的协议，以与符号( & )分隔。
+
+ 下面的例子中，将 Named 和 Aged 两个协议按照上述语法组合成一个协议，作为函数参数的类型:
+ */
+protocol Named {
+    var name: String { get }
+}
+
+protocol Aged {
+    var age: Int { get }
+}
+
+struct ProtocolPerson: Named, Aged {
+    var name: String
+    var age: Int
+}
+
 
 //MARK:-Main ViewController
 class Protocols: UIViewController {
 
+    func wishHappyBirthday(to celebrator: Named & Aged) {
+        print("Happy birthday,\(celebrator.name),you are \(celebrator.age)")
+        
+        /*
+         Named协议包含String类型的name属性，Aged协议包含String类型的age属性。ProtocolPerson结构体遵 循了这两个协议。
+         
+         wishHappyBirthday(to:)函数的参数celebrator的类型为：Named & Aged；这意味着它不关心参数的具体类型，只要参数符合这两个协议即可
+         */
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -362,6 +442,7 @@ class Protocols: UIViewController {
         let simonTheHanster = Hamster(name: "Simon")
         let somethingTextRepresentable: TextRepresentable = simonTheHanster
         print(somethingTextRepresentable.textualDescription)
+        
         print("------------------------------------------")
         //MARK:-协议类型的集合
         //协议类型可以在数组或者字典这样的集合中使用，下面的例子创建了一个 元素类型为 TextRepresentable 的数组:
@@ -369,7 +450,13 @@ class Protocols: UIViewController {
         for thing in things {
             print(thing.textualDescription)
         }
+        print("------------------------------------------")
         
+        print(game.prettyTextualDescription)
+        
+        let birthdayPerson = ProtocolPerson(name: "Malcolm", age: 21)
+        wishHappyBirthday(to: birthdayPerson)
+        //这个例子创建了一个名为birthdayPerson的ProtocolPerson类型的实例，作为参数传递给wishHappyBirthday(to:)函数。因为ProtocolPerson同时符合这两个协议，所以这个参数合法，函数将打印生日问候语。
     }
     
   
