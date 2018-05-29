@@ -381,6 +381,132 @@ struct ProtocolPerson: Named, Aged {
     var age: Int
 }
 
+//MARK:-检查协议一致性
+/*
+ 你可以使用类型转换中描述的 is 和 as 操作符来检查协议一致性，即是否符合某协议，并且可以转换到指定 的协议类型。检查和转换到某个协议类型在语法上和类型的检查和转换完全相同:
+ 
+ • is 用来检查实例是否符合某个协议，若符合则返回 true ，否则返回 false 。
+ • as? 返回一个可选值，当实例符合某个协议时，返回类型为协议类型的可选值，否则返回 nil 。
+ • as! 将实例强制向下转换到某个协议类型，如果强转失败，会引发运行时错误。
+ 
+ 下面的例子定义了一个 HasArea 协议，该协议定义了一个 Double 类型的可读属性 area :
+ */
+protocol HasArea {
+    var area: Double { get }
+}
+
+class Circle: HasArea {
+    let pi = 3.1415926
+    var radius: Double
+    var area: Double { return pi * radius * radius }
+    init(radius: Double) {
+        self.radius = radius
+    }
+}
+
+class Country: HasArea {
+    var area: Double
+    init(area: Double) {
+        self.area = area
+    }
+}
+/*
+ Circle类把area属性实现为基于存储属性的radius的计算属性；Country类把area属性实现为存储属性。这两个类都正确地符合了HasArea协议
+ */
+
+class ProtocolAnimal {
+    var legs: Int
+    init(legs: Int) {
+        self.legs = legs
+    }
+}
+
+//MARK:-可选的协议要求
+/*
+ 协议可以定义可选要求，遵循协议的类型可以选择是否实现这些要求。在协议中使用 optional 关键字作为前缀 来定义可选要求。可选要求用在你需要和 Objective-C 打交道的代码中。协议和可选要求都必须带上 @objc 属 性。标记 @objc 特性的协议只能被继承自 Objective-C 类的类或者 @objc 类遵循，其他类以及结构体和枚举 均不能遵循这种协议。
+ 
+ 使用可选要求时(例如，可选的方法或者属性)，它们的类型会自动变成可选的。比如，一个类型为(int) -> String 的方法会变成 ((Int) -> String)? 。需要注意的是整个函数类型是可选的，而不是函数的返回值。
+ 
+ 协议中的可选要求可通过可选链式调用来使用，因为遵循协议的类型可能没有实现这些可选要求。类似 someOptionalMethod?(someArgument) 这样，你可以在可选方法名称后加上 ? 来调用可选方法。详细内容可在可选链式 调用章节中查看。
+
+ 下面的例子定义了一个名为 Counter 的用于整数计数的类，它使用外部的数据源来提供每次的增量。数据源由 CounterDataSource 协议定义，包含两个可选要求:
+ */
+@objc protocol CounterDataSource {
+    @objc optional func increment(forCount count: Int) -> Int
+    @objc optional var fixedIncrement:Int { get }
+    //CounterDataSource 协议定义了一个可选方法 increment(forCount:) 和一个可选属性 fiexdIncrement ，它们 使用了不同的方法来从数据源中获取适当的增量值。
+}
+class ProtocolCounter {
+    var count = 0
+    var dataSource: CounterDataSource?
+    func increment() {
+        if let amount = dataSource?.increment?(forCount: count) {
+            count += amount
+        } else if let amount = dataSource?.fixedIncrement {
+            count += amount
+        }
+    }
+}
+
+class ThreeSource: NSObject, CounterDataSource {
+    let fixedIncrement = 3
+}
+
+//下面是一个更为复杂的数据源 TowardsZeroSource ，它将使得最后的值变为 0 :
+@objc class TowardsZeroSource: NSObject, CounterDataSource {
+    func increment(forCount count: Int) -> Int {
+        if count == 0 {
+            return 0
+        } else if count < 0 {
+            return 1
+        } else {
+            return -1
+        } }
+}
+
+//MARK:-协议扩展
+/*
+ 协议可以通过扩展来为遵循协议的类型提供属性、方法以及下标的实现。通过这种方式，你可以基于协议本身来实现这些功能，而无需在每个遵循协议的类型中都重复同样的实现，也无需使用全局函数。
+ 
+ 例如，可以扩展 RandomNumberGenerator 协议来提供 randomBool() 方法。该方法使用协议中定义的 rando m() 方法来返回一个随机的 Bool 值:
+ */
+extension RandomNumberGenerator {
+    func randomBool() -> Bool {
+        return random() > 0.5
+    }
+    
+}
+
+//MARK:-提供默认实现
+/*
+ 可以通过协议扩展来为协议要求的属性、方法以及下标提供默认的实现。如果遵循协议的类型为这些要求提供了自己的实现，那么这些自定义实现将会替代扩展中的默认实现被使用。
+ 
+ 例如，PrettyTextRepresentable 协议继承自 TextRepresentable 协议，可以为其提供一个默认的 ualDescription 属性，只是简单地返回 textualDescription 属性的值:
+ */
+extension PrettyTextRepresentable {
+    var prettyTextualDescription: String {
+        return textualDescription
+    }
+}
+
+//MARK:-为协议扩展添加限制条件
+/*
+ 在扩展协议的时候，可以指定一些限制条件，只有遵循协议的类型满足这些限制条件时，才能获得协议扩展提供的默认实现。这些限制条件写在协议名之后，使用 where 子句来描述，正如Where子句 (页 0)中所描述的。
+ 
+ 例如，你可以扩展Collection协议，但是只适用于合中的元素遵循了Equatable协议的情况:
+ */
+
+extension Collection where Element: Equatable {
+    func allEqual() -> Bool {
+        for element in self {
+            if element != self.first {
+                return false
+            }
+        }
+        return true
+    }
+}
+
 
 //MARK:-Main ViewController
 class Protocols: UIViewController {
@@ -457,9 +583,54 @@ class Protocols: UIViewController {
         let birthdayPerson = ProtocolPerson(name: "Malcolm", age: 21)
         wishHappyBirthday(to: birthdayPerson)
         //这个例子创建了一个名为birthdayPerson的ProtocolPerson类型的实例，作为参数传递给wishHappyBirthday(to:)函数。因为ProtocolPerson同时符合这两个协议，所以这个参数合法，函数将打印生日问候语。
-    }
+        
+//        Circle，Country，Animal 并没有一个共同的基类，尽管如此，它们都是类，它们的实例都可以作为 ect 类型的值，存储在同一个数组中:
+        let objects: [AnyObject] = [
+            Circle(radius: 2.0),
+            Country(area:243_610),
+            ProtocolAnimal(legs: 4)
+            //objects 数组使用字面量初始化，数组包含一个 radius 为 2 的 Circle 的实例，一个保存了英国国土面 积的 Country 实例和一个 legs 为 4 的 Animal 实例
+        ]
+        //如下所示，objects 数组可以被迭代，并对迭代出的每一个元素进行检查，看它是否符合 HasArea 协议:
+        for object in objects {
+            if let objectWithArea = object as? HasArea {
+                print("Area is \(objectWithArea.area)")
+            } else {
+                print("Something that does not have an area")
+            }
+            /*
+             当迭代出的元素符合 HasArea 协议时，将 as? 操作符返回的可选值通过可选绑定，绑定到 objectWithArea 常量上。objectWithArea 是 HasArea 协议类型的实例，因此 area 属性可以被访问和打印。
+             objects 数组中的元素的类型并不会因为强转而丢失类型信息，它们仍然是 Circle，Country，Animal 类 型。然而，当它们被赋值给 objectWithArea 常量时，只被视为 HasArea 类型，因此只有 area 属性能够被 访问。
+             */
+            
+            let counter = ProtocolCounter()
+            counter.dataSource = ThreeSource()
+            for _ in 1...4 {
+                counter.increment()
+                print(counter.count)
+            }
+            //上述代码新建了一个 Counter 实例，并将它的数据源设置为一个 ThreeSource 的实例，然后调用 incremen t() 方法四次。和预期一样，每次调用都会将 count 的值增加 3 .
+            
+            //你可以使用 TowardsZeroSource 实例将 Counter 实例来从 -4 增加到 0 。一旦增加到 0 ，数值便不会再 有变动:
+            counter.count = -4
+            counter.dataSource = TowardsZeroSource()
+            for _ in 1...5 {
+                counter.increment()
+                print(counter.count)
+            }
+         
+//            通过协议扩展，所有遵循协议的类型，都能自动获得这个扩展所增加的方法实现，无需任何额外修改:
+            let generator = LinearCongruentialGenerator()
+            print("Here's a random number: \(generator.random())")
+            print("And here's a random Boolean: \(generator.randomBool())")
+            
+            let equalNumbers = [100, 100, 100, 100, 100]
+            let differentNumbers = [100, 100, 200, 100, 200]
+            print(equalNumbers.allEqual())//true
+            print(differentNumbers.allEqual())//false
+        }
     
-  
+    }
 }
 
 
