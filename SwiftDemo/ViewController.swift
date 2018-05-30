@@ -33,6 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "NestedTypes",//嵌套类型
                       "Extensions",//扩展
                       "Protocols",//协议
+                      "Generics",//泛型
                     ]
     
     
