@@ -40,6 +40,16 @@ class Generics: UIViewController {
         if let topItem = stackOfStrings.topItem {
             print("The top item on the stack is \(topItem).")
         }
+        
+        let strings = ["cat", "dog", "llama", "parakeet", "terrapin"]
+        if let foundIndex = findIndex(ofString: "llama", in: strings) {
+            print("The index of llama is \(foundIndex)")
+        }
+        
+        let doubleIndex = findIndex(array: [3.14159, 0.1, 0.25], 9.3)
+        let stringIndex = findIndex(array: ["Mike", "Malcolm", "Andrea"], "Andrea")
+        print(doubleIndex as Any, stringIndex as Any)
+        
     }
 
     //MARK:-泛型所解决的问题
@@ -72,7 +82,6 @@ class Generics: UIViewController {
          这个函数的泛型版本使用了占位类型名(在这里用字母 T 来表示)来代替实际类型名(例如 Int、String或 Double )。占位类型名没有指明 T 必须是什么类型，但是它指明了 a 和 b 必须是同一类型 T ，无论 T 代表什么类型。只有 swapTwoValues(_:_:) 函数在调用时，才能根据所传入的实际类型决定 T 所代表的类型。
          
          另外一个不同之处在于这个泛型函数名( swapTwoValues(_:_:) )后面跟着占位类型名( T )，并用尖括号括起 来( <T> )。这个尖括号告诉 Swift 那个 T 是 swapTwoValues(_:_:) 函数定义内的一个占位类型名，因此 S wift 不会去查找名为 T 的实际类型。
-
          */
     }
     
@@ -90,7 +99,36 @@ class Generics: UIViewController {
      */
     
     
+    //MARK:-类型约束
+    /*
+     swapTwoValues(_:_:)函数和Stack类型可以作用于任何类型。不过，有的时候如果能将使用在泛型函数和泛 型类型中的类型添加一个特定的类型约束，将会是非常有用的。类型约束可以指定一个类型参数必须继承自指定 类，或者符合一个特定的协议或协议组合。
+     
+     类型约束语法:
+     你可以在一个类型参数名后面放置一个类名或者协议名，并用冒号进行分隔，来定义类型约束，它们将成为类型参数列表的一部分。对泛型函数添加类型约束的基本语法如下所示(作用于泛型类型时的语法与之相同)
+     */
+    func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U)  {
+        
+    }
     
+    func findIndex<T: Equatable>(array: [T], _ valueToFind: T) -> Int? {
+        for (index, value) in array.enumerated() {
+            if value == valueToFind {
+                return index
+            }
+        }
+        return nil
+    }
+    
+    //MARK:-类型约束实践
+    func findIndex(ofString valueToFind: String, in array: [String]) -> Int? {
+        for (index, value) in array.enumerated() {
+            if value == valueToFind {
+                return index
+            }
+        }
+        return nil
+    }
+
 }
 
 //MARK:-泛型类型
