@@ -242,8 +242,8 @@ class CollectionTypes: UIViewController {
     }
     
     func creatingDictionaryWithDictionaryLiteral() {
-        var airport: [String: String] = ["成都":"双流机场","北京":"首都机场"]
-        var airports = ["成都":"双流机场","北京":"首都机场"]
+        let airport: [String: String] = ["成都":"双流机场","北京":"首都机场"]
+        let airports = ["成都":"双流机场","北京":"首都机场"]
         print(airport,airports)
     }
     
