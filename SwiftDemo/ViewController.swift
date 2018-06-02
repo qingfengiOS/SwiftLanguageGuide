@@ -31,9 +31,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "ErrorHandling",//错误处理
                      "TypeCasting",//类型捕获
                      "NestedTypes",//嵌套类型
-                      "Extensions",//扩展
-                      "Protocols",//协议
-                      "Generics",//泛型
+                     "Extensions",//扩展
+                     "Protocols",//协议
+                     "Generics",//泛型
+                     "AutomaticReferenceCounting",//自动引用计数
                     ]
     
     

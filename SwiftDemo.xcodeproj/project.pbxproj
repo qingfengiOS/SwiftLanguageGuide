@@ -13,6 +13,7 @@
 		FD069D452088CD27009938E5 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD069D442088CD27009938E5 /* BasicOperators.swift */; };
 		FD0CD85020A86913006E5D16 /* Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0CD84F20A86913006E5D16 /* Initialization.swift */; };
 		FD0F984020B591CD000B1412 /* TypeCasting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0F983F20B591CD000B1412 /* TypeCasting.swift */; };
+		FD1E66B420C2D8D30010A853 /* AutomaticReferenceCounting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E66B320C2D8D30010A853 /* AutomaticReferenceCounting.swift */; };
 		FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235787207E49CB000D1C75 /* AppDelegate.swift */; };
 		FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD235789207E49CB000D1C75 /* ViewController.swift */; };
 		FD23578D207E49CB000D1C75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD23578B207E49CB000D1C75 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 		FD069D442088CD27009938E5 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
 		FD0CD84F20A86913006E5D16 /* Initialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initialization.swift; sourceTree = "<group>"; };
 		FD0F983F20B591CD000B1412 /* TypeCasting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCasting.swift; sourceTree = "<group>"; };
+		FD1E66B320C2D8D30010A853 /* AutomaticReferenceCounting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticReferenceCounting.swift; sourceTree = "<group>"; };
 		FD235784207E49CB000D1C75 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD235787207E49CB000D1C75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD235789207E49CB000D1C75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				FD00DDAE20B7F4C40000BD2E /* Extensions.swift */,
 				FD3DAF3A20B99D8D00984704 /* Protocols.swift */,
 				FD64719420BEDB1800D68694 /* Generics.swift */,
+				FD1E66B320C2D8D30010A853 /* AutomaticReferenceCounting.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				FD4C20E820A7128E00B21393 /* Inheritance.swift in Sources */,
 				FD49F23620B6C11800BC8864 /* NestedTypes.swift in Sources */,
 				FD23578A207E49CB000D1C75 /* ViewController.swift in Sources */,
+				FD1E66B420C2D8D30010A853 /* AutomaticReferenceCounting.swift in Sources */,
 				FDB7F77E209366F300B75623 /* Closures.swift in Sources */,
 				FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */,
 				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
