@@ -155,6 +155,107 @@ class CreditCard {
     }
 }
 
+//MARK:-闭包引起的循环强引用
+/*
+ 循环强引用还发生在当你将一个闭包赋值给类实例的某个属性，并且这个闭包体中又使用了这个类的实例方法时。这个闭包体中可能访问了实例的某个属性，例如self.someProperty,或者闭包中调用了某个实例方法，例如self.someMethod()。这两种情况下都导致了闭包“捕获”self，从而产生了循环强引用
+ 
+ 循环强引用的产生，是因为闭包和类相似，都是引用类型。当你把一个闭包赋值给某个属性时，你是将这个闭包的引用赋值给了属性。实质上，这跟之前的问题是一样的——两个强引用让彼此一直有效。但是，和两个类实例不同，这次一个是类实例，另一个是闭包。
+ 
+ Swift提供了一种优雅的方法来解决这个问题，称之为闭包捕获列表（closure capture list）
+ 
+ 下面的例子展示了当一个闭包引用self之后如何产生一个循环强引用的。例子中定义了一个叫HTMLElement的类，用一种简单的模型表示 HTML 文档中的一个单独的元素：
+ */
+class HTMLElement {
+    let name: String
+    let text: String?
+    
+    lazy var asHTML: () -> String = {
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+    /*
+     HTMLElement类定义了一个name属性来表示这个元素的名称，例如代表头部元素的"h1"，代表段落的"p"，或者代表换行的"br"。HTMLElement还定义了一个可选属性text，用来设置 HTML 元素呈现的文本。
+     
+     除了上面的两个属性，HTMLElement还定义了一个lazy属性asHTML。这个属性引用了一个将name和text组合成 HTML 字符串片段的闭包。该属性是Void -> String类型，或者可以理解为“一个没有参数，返回String的函数”。
+     
+     默认情况下，闭包赋值给了asHTML属性，这个闭包返回一个代表 HTML 标签的字符串。如果text值存在，该标签就包含可选值text；如果text不存在，该标签就不包含文本。对于段落元素，根据text是"some text"还是nil，闭包会返回"<p>some text</p>"或者"<p />"。
+     
+     可以像实例方法那样去命名、使用asHTML属性。然而，由于asHTML是闭包而不是实例方法，如果你想改变特定 HTML 元素的处理方式的话，可以用自定义的闭包来取代默认值。
+      */
+    
+}
+
+//MARK:-解决闭包引起的循环强引用
+/*
+ 在定义闭包时同时定义捕获列表作为闭包的一部分，通过这种方式可以解决闭包和类实例之间的循环强引用。捕获列表定义了闭包体内捕获一个或者多个引用类型的规则。跟解决两个类实例间的循环强引用一样，声明每个捕获的引用为弱引用或无主引用，而不是强引用。应当根据代码关系来决定使用弱引用还是无主引用。
+ 
+ Swift 有如下要求：只要在闭包内使用self的成员，就要用self.someProperty或者self.someMethod()（而不只是someProperty或someMethod()）。这提醒你可能会一不小心就捕获了self。
+ */
+
+//MARK:-定义捕获列表
+/*
+ 捕获列表中的每一项都由一对元素组成，一个元素是weak或unowned关键字，另一个元素是类实例的引用（例如self）或初始化过的变量（如delegate = self.delegate!）。这些项在方括号中用逗号分开。
+ 
+ 如果闭包有参数列表和返回类型，把捕获列表放在它们前面：
+ lazy var someClosure: (Int, String) -> String = {
+     [unowned self, weak delegate = self.delegate!] (index: Int, stringToProcess: String) -> String in
+     // 这里是闭包的函数体
+ }
+ 
+ 如果闭包没有指明参数列表或者返回类型，即它们会通过上下文推断，那么可以把捕获列表和关键字in放在闭包最开始的地方
+ lazy var someClosure: Void -> String = {
+     [unowned self, weak delegate = self.delegate!] in
+     // 这里是闭包的函数体
+ }
+ */
+
+/*
+ 弱引用和无主引用
+ 
+ 在闭包和捕获的实例总是互相引用并且总是同时销毁时，将闭包内的捕获定义为无主引用。
+ 
+ 相反的，在被捕获的引用可能会变为nil时，将闭包内的捕获定义为弱引用。弱引用总是可选类型，并且当引用的实例被销毁后，弱引用的值会自动置为nil。这使我们可以在闭包体内检查它们是否存在。
+ 
+ 如果被捕获的引用绝对不会变为nil，应该用无主引用，而不是弱引用
+ */
+class HTMLElement2 {
+    let name: String
+    let text: String?
+    
+    lazy var asHTML: () -> String = {
+        [unowned self] in
+        
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+}
+    
+
+
 
 
 //MARK:-MainController
@@ -211,6 +312,34 @@ class AutomaticReferenceCounting: UIViewController {
         taylor?.card = CreditCard(number: 123_5678_0192_2335, customer: taylor!)
         
         taylor = nil//由于再也没有指向Customer实例的强引用，该实例被销毁了。其后，再也没有指向CreditCard实例的强引用，该实例也随之被销毁了
+        
+        /*
+         可以将一个闭包赋值给asHTML属性，这个闭包能在text属性是nil时使用默认文本，这是为了避免返回一个空的 HTML 标签：
+         */
+        let heading = HTMLElement(name: "h1")
+        let defaultText = "some default text"
+        heading.asHTML = {
+            return "<\(heading.name)>\(heading.text ?? defaultText)</\(heading.name)>"
+        }
+        print(heading.asHTML())
+        
+        /*
+         HTMLElement类只提供了一个构造函数，通过name和text（如果有的话）参数来初始化一个新元素。该类也定义了一个析构函数，当HTMLElement实例被销毁时，打印一条消息。
+         */
+        var paragraph: HTMLElement? = HTMLElement(name: "p", text:"hello, world")
+        print(paragraph!.asHTML)
+        /*
+         实例的asHTML属性持有闭包的强引用。但是，闭包在其闭包体内使用了self（引用了self.name和self.text），因此闭包捕获了self，这意味着闭包又反过来持有了HTMLElement实例的强引用。这样两个对象就产生了循环强引用。
+         
+         如果设置paragraph变量为nil，打破它持有的HTMLElement实例的强引用，HTMLElement实例和它的闭包都不会被销毁，也是因为循环强引用：
+         */
+        paragraph = nil//HTMLElement的析构函数中的消息并没有被打印，证明了HTMLElement实例并没有被销毁。
+        
+        var paragraph2: HTMLElement2? = HTMLElement2(name: "p(解决循环强引用的)", text:"hello, world")
+        print(paragraph2!.asHTML)
+        
+        paragraph = nil//这一次，闭包以无主引用的形式捕获self，并不会持有HTMLElement实例的强引用。如果将paragraph赋值为nil，HTMLElement实例将会被销毁，并能看到它的析构函数打印出的消息：
+
         
     }
 }
