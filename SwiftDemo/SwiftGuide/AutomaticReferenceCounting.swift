@@ -2,7 +2,7 @@
 //  AutomaticReferenceCounting.swift
 //  SwiftDemo
 //
-//  Created by liyiping on 2018/6/2.
+//  Created by qingfengiOS on 2018/6/2.
 //  Copyright © 2018年 情风. All rights reserved.
 //
 
@@ -335,7 +335,7 @@ class AutomaticReferenceCounting: UIViewController {
          */
         paragraph = nil//HTMLElement的析构函数中的消息并没有被打印，证明了HTMLElement实例并没有被销毁。
         
-        var paragraph2: HTMLElement2? = HTMLElement2(name: "p(解决循环强引用的)", text:"hello, world")
+        let paragraph2: HTMLElement2? = HTMLElement2(name: "p(解决循环强引用的)", text:"hello, world")
         print(paragraph2!.asHTML)
         
         paragraph = nil//这一次，闭包以无主引用的形式捕获self，并不会持有HTMLElement实例的强引用。如果将paragraph赋值为nil，HTMLElement实例将会被销毁，并能看到它的析构函数打印出的消息：

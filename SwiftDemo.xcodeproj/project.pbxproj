@@ -35,6 +35,7 @@
 		FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */; };
 		FDAEC6AF20B3035900F74325 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAEC6AE20B3035900F74325 /* ErrorHandling.swift */; };
 		FDB7F77E209366F300B75623 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB7F77D209366F300B75623 /* Closures.swift */; };
+		FDBD349320C5150400600EBB /* MemorySafety.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBD349220C5150400600EBB /* MemorySafety.swift */; };
 		FDBF8CC720ADA19A00753110 /* Deinitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBF8CC620ADA19A00753110 /* Deinitialization.swift */; };
 		FDEABE7E209F324700280872 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEABE7D209F324700280872 /* Properties.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		FD78723C208B7F2900E16926 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
 		FDAEC6AE20B3035900F74325 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		FDB7F77D209366F300B75623 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		FDBD349220C5150400600EBB /* MemorySafety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySafety.swift; sourceTree = "<group>"; };
 		FDBF8CC620ADA19A00753110 /* Deinitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deinitialization.swift; sourceTree = "<group>"; };
 		FDEABE7D209F324700280872 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,6 +200,7 @@
 				FD3DAF3A20B99D8D00984704 /* Protocols.swift */,
 				FD64719420BEDB1800D68694 /* Generics.swift */,
 				FD1E66B320C2D8D30010A853 /* AutomaticReferenceCounting.swift */,
+				FDBD349220C5150400600EBB /* MemorySafety.swift */,
 			);
 			path = SwiftGuide;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				FDB7F77E209366F300B75623 /* Closures.swift in Sources */,
 				FD65A85F209B3D6900869121 /* Enumerations.swift in Sources */,
 				FD2357B7207E4DC7000D1C75 /* TheBasic.swift in Sources */,
+				FDBD349320C5150400600EBB /* MemorySafety.swift in Sources */,
 				FD64719520BEDB1800D68694 /* Generics.swift in Sources */,
 				FDAEC6AF20B3035900F74325 /* ErrorHandling.swift in Sources */,
 				FD00DDAF20B7F4C40000BD2E /* Extensions.swift in Sources */,

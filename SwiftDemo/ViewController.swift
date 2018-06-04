@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray = ["TheBasic",//继承
+    var dataArray = ["TheBasic",//基础
                      "BasicOperators",//基本操作
                      "StringsAndCharacters",//字符和字符串
                      "CollectionTypes",//集合类型
@@ -35,6 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "Protocols",//协议
                      "Generics",//泛型
                      "AutomaticReferenceCounting",//自动引用计数
+                     "MemorySafety",//内存安全
                     ]
     
     
