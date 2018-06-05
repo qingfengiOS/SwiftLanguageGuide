@@ -145,7 +145,7 @@ class TheBasic: UIViewController {
             print("Eww, turnips are horrible.")
         }
         
-        //Swiftz阻止非Boolean值代表Boolean
+        //Swift阻止非Boolean值代表Boolean
         let i = 1
 //        if i {// 'Int' is not convertible to 'Bool'
 //            print("")
