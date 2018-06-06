@@ -35,9 +35,9 @@ class CollectionTypes: UIViewController {
     /// 集合的可变性
     func mutabilityOfCollections() {
        /*
-         如果创建一个 Arrays 、 Sets 或 Dictionaries 并且把它分配成一个变量，这个 合将会是可变的。这意味着我们 可以在创建之后添加更多或移除已存在的数据项，或者改变 合中的数据项。如果我们把 Arrays 、 Sets 或 ionaries 分配成常量，那么它就是不可变的，它的大小和内容都不能被改变。
+         如果创建一个 Arrays 、 Sets 或 Dictionaries 并且把它分配成一个变量，这个集合将会是可变的。这意味着我们可以在创建之后添加更多或移除已存在的数据项，或者改变集合中的数据项。如果我们把 Arrays 、 Sets 或 Dictionaries 分配成常量，那么它就是不可变的，它的大小和内容都不能被改变。
          注意:
-         在我们不需要改变 合的时候创建不可变 合是很好的实践。如此 Swift 编译器可以优化我们创建的 合。
+         在我们不需要改变集合的时候创建不可变集合是很好的实践。如此 Swift 编译器可以优化我们创建的集合。
          */
         
     }
