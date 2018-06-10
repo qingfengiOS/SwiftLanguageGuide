@@ -19,6 +19,7 @@ class CollectionTypes: UIViewController {
         creatingAnArrayWithDefaultValue()
         creatingAnArrayByAddingTwoArraysTogether()
         creatingAnArrayWithAnArrayLiteral()
+        createTwo_Array()
         accessingAndModifyingAnArray()
         
         creatingAndInitializingAnEmptySet()
@@ -51,6 +52,8 @@ class CollectionTypes: UIViewController {
          */
         someInts.append(3)// someInts 现在包含一个 Int 值
         someInts = []// someInts 现在是空数组，但是仍然是 [Int] 类型的。
+    
+        
     }
     
     /// 创建一个带有默认值的数组
@@ -80,6 +83,17 @@ class CollectionTypes: UIViewController {
         
     }
     
+    
+    /// 二维数组
+    func createTwo_Array() {
+        let matrix: [[Int]] = [[1,2,3,4],[4,5,5,0]]
+        
+        print(matrix);
+        
+        let matix2: Array<Array<String>> = [["first","second","third"],["fourth","fifth"]]
+        
+        print("matix2的0行2列是： \(matix2[0][2])")
+    }
     
     /// 访问和修改数组
     func accessingAndModifyingAnArray() {
