@@ -288,7 +288,7 @@ class CollectionTypes: UIViewController {
         
         //我们也可以使用下标语法来在字典中检索特定键对应的值。因为有可能请求的键没有对应的值存在，字典的下标 访问会返回对应值的类型的可选值。如果这个字典包含请求键所对应的值，下标会返回一个包含这个存在值的可 选值，否则将返回 nil :
         if let airportName = airports["DUB"] {
-            print("The name of the airport is (airportName).")
+            print("The name of the airport is \(airportName).")
         } else {
             print("That airport is not in the airports dictionary.")
         }

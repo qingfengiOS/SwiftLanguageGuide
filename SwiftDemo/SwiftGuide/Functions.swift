@@ -230,7 +230,7 @@ class Functions: UIViewController {
     //你可以用 (Int, Int) -> Int 这样的函数类型作为另一个函数的参数类型。这样你可以将函数的一部分实现留给 函数的调用者来提供。
     //下面是另一个例子，正如上面的函数一样，同样是输出某种数学运算结果:（函数参数提供运算方法，根据运算方法来计算第二三个参数）
     func printMathResult(_ mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
-        print("Result \(mathFunction(a,b))")//使用第一个函数参数，求第二个和第三个蚕食的和
+        print("Result \(mathFunction(a,b))")//使用第一个函数参数，求第二个和第三个参数的和
         
         /*
          这个例子定义了 printMathResult(_:_:_:) 函数，它有三个参数:第一个参数叫 mathFunction ，类型是 (Int, Int) -> Int ，你可以传入任何这种类型的函数;第二个和第三个参数叫 a 和 b ，它们的类型都是 Int ，这 两个值作为已给出的函数的输入值。

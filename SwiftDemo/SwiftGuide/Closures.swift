@@ -205,7 +205,7 @@ class Closures: UIViewController {
     
     //MARK: --值捕获
     func makeIncrementer(forIncrement amount: Int) -> () -> Int {
-        //Swift 中，可以捕获值的闭包的最简单形式是嵌套函数，也就是定义在其他函数的函数体内的函数。嵌套函数可 以捕获其外部函数所有的参数以及定义的常量和变量。
+        //Swift 中，可以捕获值的闭包的最简单形式是嵌套函数，也就是定义在其他函数的函数体内的函数。嵌套函数可以捕获其外部函数所有的参数以及定义的常量和变量。
         
         //举个例子，这有一个叫做 makeIncrementor 的函数，其包含了一个叫做 incrementor 的嵌套函数。嵌套函数 incrementor() 从上下文中捕获了两个值，runningTotal 和 amount。捕获这些值之后，makeIncrementor 将 incrementor 作为闭包返回。每次调用 incrementor 时，其会以 amount 作为增量增加 runningTotal 的值。
         
