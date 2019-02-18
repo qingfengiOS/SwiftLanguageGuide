@@ -221,9 +221,7 @@ class TheBasic: UIViewController {
         
         let assumedString: String! = "An implicitly unwrapped optional string."
         let _: String = assumedString // 不需要感叹号
-        
     }
-    
     
     /// 断言
     func assert() {
@@ -237,10 +235,7 @@ class TheBasic: UIViewController {
         • 一个可选值现在是 nil ，但是后面的代码运行需要一个非 nil 值。
          */
     }
-    
-    
-    
-    
-    
-    
 }
+
+
+

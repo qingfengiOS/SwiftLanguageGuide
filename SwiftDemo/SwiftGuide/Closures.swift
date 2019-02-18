@@ -46,6 +46,8 @@ class Closures: UIViewController {
         
         captureValue()
         autoClosure()
+        escapingClosure()
+        
     }
     
     /// sorted 方法
@@ -326,8 +328,48 @@ class Closures: UIViewController {
          */
     }
    
-    
+    func escapingClosure() {
+        S().method1()
+        S().method2()
+        S().method3()
+    }
     
 }
 
 
+class S {
+    var foo = "foo"
+    
+    func doWork(block: () -> ()) {
+        block()
+    }
+    
+    func doWorkAsync(block:@escaping () -> ()) {
+        DispatchQueue.main.async {
+            block()
+        }
+    }
+    
+    func method1() {
+        doWork {
+            print(foo)
+        }
+        foo = "bar1111"
+    }
+    
+    func method2() {
+        doWorkAsync {
+            print(self.foo)
+        }
+        foo = "bar222"
+    }
+    
+    func method3() {
+        doWorkAsync {
+            [weak self] in
+            print(self?.foo ?? "nil")
+        }
+        foo = "bar333"
+    }
+    
+}
