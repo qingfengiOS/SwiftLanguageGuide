@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray = ["TheBasic",//基础
+    var dataArray = [["TheBasic",//基础
                      "BasicOperators",//基本操作
                      "StringsAndCharacters",//字符和字符串
                      "CollectionTypes",//集合类型
@@ -38,7 +38,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                      "MemorySafety",//内存安全
                      "AccessControl",//访问控制
                      "AdvancedOperators",
-                    ]
+                    ],
+                     ["MoreOperator",
+                      "MutiParamterFunction",
+                      "initializeFunctionOrder",]]
     
     
     override func viewDidLoad() {
@@ -47,23 +50,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView .register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.tableFooterView = UIView()
         
+        print("-----\(_gainCurrentLanguage())-----")
+    }
+    private func _gainCurrentLanguage() -> String {
+        let userDefulat = UserDefaults.standard
+        if let languages = userDefulat.object(forKey: "AppleLanguages") as? [String] {
+            let systemLanguage = languages.first ?? ""
+            return systemLanguage
+        }
+        return ""
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.dataArray.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArray.count
+        let array = self.dataArray[section]
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.dataArray[indexPath.row]
+        cell.textLabel?.text = self.dataArray[indexPath.section][indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     
         return cell;
         
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let viewController = getViewContrlooerByClassName(className: self.dataArray[indexPath.row])
+        let viewController = getViewContrlooerByClassName(className: self.dataArray[indexPath.section][indexPath.row])
         self.navigationController? .pushViewController(viewController!, animated: true)
     }
     
