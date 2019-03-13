@@ -28,6 +28,10 @@ class initializeFunctionOrder: UIViewController {
             print(obj.description)
         }
         
+        let m: Person = Person.init(name: "M", age: 18)
+        let r = Mirror(reflecting: m)
+        print("\(String(describing: r.displayStyle))")
+        
     }
 }
 
@@ -65,7 +69,17 @@ extension initializeFunctionOrder {
     /*
      其中第三步是根据具体情况决定的，如果我们在子类中不需要对父类的成员做出改变的话，就不存在第 3 步。而在这种情况下，Swift 会自动地对父类的对应 init 方法进行调用，也就是说，第 2 步的 super.init() 也是可以不用写的 (但是实际上还是调用的，只不过是为了简便 Swift 帮我们完成了)。
      */
-    
-    
+   
 }
+
+extension initializeFunctionOrder {
+    struct Person {
+        var name: String
+        var age: Int
+        
+     
+        
+    }
+}
+
 

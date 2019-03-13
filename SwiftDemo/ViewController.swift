@@ -41,7 +41,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     ],
                      ["MoreOperator",
                       "MutiParamterFunction",
-                      "initializeFunctionOrder",]]
+                      "initializeFunctionOrder",
+                      "patternMatching",
+                      "GetObjectType"]]
     
     
     override func viewDidLoad() {
@@ -50,16 +52,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView .register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.tableFooterView = UIView()
         
-        print("-----\(_gainCurrentLanguage())-----")
     }
-    private func _gainCurrentLanguage() -> String {
-        let userDefulat = UserDefaults.standard
-        if let languages = userDefulat.object(forKey: "AppleLanguages") as? [String] {
-            let systemLanguage = languages.first ?? ""
-            return systemLanguage
-        }
-        return ""
-    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataArray.count
     }

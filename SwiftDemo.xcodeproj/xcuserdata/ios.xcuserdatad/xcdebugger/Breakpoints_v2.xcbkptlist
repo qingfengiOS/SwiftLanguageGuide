@@ -26,7 +26,7 @@
                   moduleName = "SwiftDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/Github/SwiftLanguageGuide/SwiftDemo/SwiftGuide/Closures.swift"
-                  timestampString = "572435305.134729"
+                  timestampString = "574158451.80503"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "354"
@@ -41,7 +41,7 @@
                   moduleName = "SwiftDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/Github/SwiftLanguageGuide/SwiftDemo/SwiftGuide/Closures.swift"
-                  timestampString = "572435305.136826"
+                  timestampString = "574158451.808405"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "355"
@@ -74,7 +74,7 @@
                   moduleName = "SwiftDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/Github/SwiftLanguageGuide/SwiftDemo/SwiftGuide/Closures.swift"
-                  timestampString = "572435305.14327"
+                  timestampString = "574158451.818073"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "361"
@@ -89,7 +89,7 @@
                   moduleName = "SwiftDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/Github/SwiftLanguageGuide/SwiftDemo/SwiftGuide/Closures.swift"
-                  timestampString = "572435305.145105"
+                  timestampString = "574158451.820376"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "362"
@@ -122,7 +122,7 @@
                   moduleName = "SwiftDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/Github/SwiftLanguageGuide/SwiftDemo/SwiftGuide/Closures.swift"
-                  timestampString = "572435305.15046"
+                  timestampString = "574158451.8277839"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "368"
@@ -137,7 +137,7 @@
                   moduleName = "SwiftDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/Github/SwiftLanguageGuide/SwiftDemo/SwiftGuide/Closures.swift"
-                  timestampString = "572435305.1521651"
+                  timestampString = "574158451.8313251"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "369"
@@ -145,6 +145,22 @@
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftDemo/SwiftTips/patternMatching.swift"
+            timestampString = "574158451.7002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "whereInSwitchCase()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

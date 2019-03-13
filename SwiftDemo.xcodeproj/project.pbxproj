@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81068B9E221FF6980083A2D8 /* patternMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81068B9D221FF6980083A2D8 /* patternMatching.swift */; };
+		8169BEC12238E97B00A86216 /* GetObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169BEC02238E97B00A86216 /* GetObjectType.swift */; };
 		81CEA8D0221B9E5D0059C08E /* MutiParamterFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CEA8CF221B9E5D0059C08E /* MutiParamterFunction.swift */; };
 		81CEA8D2221BA2CD0059C08E /* initializeFunctionOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CEA8D1221BA2CD0059C08E /* initializeFunctionOrder.swift */; };
 		81D9CFBC221ADA2A00308A48 /* MoreOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D9CFBB221ADA2A00308A48 /* MoreOperator.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81068B9D221FF6980083A2D8 /* patternMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patternMatching.swift; sourceTree = "<group>"; };
+		8169BEC02238E97B00A86216 /* GetObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetObjectType.swift; sourceTree = "<group>"; };
 		81CEA8CF221B9E5D0059C08E /* MutiParamterFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutiParamterFunction.swift; sourceTree = "<group>"; };
 		81CEA8D1221BA2CD0059C08E /* initializeFunctionOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = initializeFunctionOrder.swift; sourceTree = "<group>"; };
 		81D9CFBB221ADA2A00308A48 /* MoreOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOperator.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				81D9CFBB221ADA2A00308A48 /* MoreOperator.swift */,
 				81CEA8CF221B9E5D0059C08E /* MutiParamterFunction.swift */,
 				81CEA8D1221BA2CD0059C08E /* initializeFunctionOrder.swift */,
+				81068B9D221FF6980083A2D8 /* patternMatching.swift */,
+				8169BEC02238E97B00A86216 /* GetObjectType.swift */,
 			);
 			path = SwiftTips;
 			sourceTree = "<group>";
@@ -387,6 +393,8 @@
 				FD5322DC20AEB388005F5374 /* OptionalChaining.swift in Sources */,
 				FD57E862208F6A1500A021AC /* CollectionTypes.swift in Sources */,
 				FD78723D208B7F2900E16926 /* StringsAndCharacters.swift in Sources */,
+				81068B9E221FF6980083A2D8 /* patternMatching.swift in Sources */,
+				8169BEC12238E97B00A86216 /* GetObjectType.swift in Sources */,
 				FD2EB4D620A335E10013255E /* Subscripts.swift in Sources */,
 				FD235788207E49CB000D1C75 /* AppDelegate.swift in Sources */,
 				FD05BE1B209DD85900907338 /* ClassesAndStructures.swift in Sources */,
